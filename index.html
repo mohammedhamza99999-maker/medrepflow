@@ -495,7 +495,7 @@ const K='medrep_v10_orders_clean',OLD=['medical_rep_mobile_v4','medrep_v9_simple
 function def(){return{profile:{},doctors:[],pharmacies:[],medicines:[],orders:[],visits:[],targets:[],reports:[],plans:[],expenses:[],stocks:[],dealerNeeds:[]}}
 function load(){let x='';try{if(window.Android&&Android.loadAppData){x=Android.loadAppData();if(x)return norm(JSON.parse(x))}}catch(e){}x=localStorage.getItem(K);if(x)try{return norm(JSON.parse(x))}catch(e){};for(let k of OLD){x=localStorage.getItem(k);if(x)try{return norm(JSON.parse(x))}catch(e){}}return def()}
 function norm(d){let b=def();d=d||{};for(let k in b)b[k]=d[k]||b[k];b.doctors=b.doctors.map(x=>({...x,doctorType:x.doctorType||x.docType||'علمي',zone:x.zone||x.area||'',importance:x.importance||'B',followDate:x.followDate||'',followNote:x.followNote||'',lat:x.lat||'',lng:x.lng||'',pharmacyIds:Array.isArray(x.pharmacyIds)?x.pharmacyIds:(x.pharmacyId?[x.pharmacyId]:[])}));b.pharmacies=b.pharmacies.map(x=>({...x,zone:x.zone||x.area||'',importance:x.importance||'B',followDate:x.followDate||'',followNote:x.followNote||'',lat:x.lat||'',lng:x.lng||''}));b.medicines=b.medicines.map(x=>({...x,scientific:x.scientific||x.scientificName||'',selling:x.selling||'',type:x.type||'',image:x.image||''}));b.orders=(b.orders||[]).map(x=>({...x,total:n(x.total)}));return b}
-function save(){let data=JSON.stringify(db);try{localStorage.setItem(K,data)}catch(e){}try{if(window.Android&&Android.saveAppData)Android.saveAppData(data)}catch(e){}render();toggleDealerFields();fillDocDealerMeds();if(typeof renderPlanExpensesProgress==='function')renderPlanExpensesProgress();if(typeof renderStockDealer==='function')renderStockDealer();}
+function save(){let data=JSON.stringify(db);try{localStorage.setItem(K,data)}catch(e){}try{if(window.Android&&Android.saveAppData)Android.saveAppData(data)}catch(e){}try{render()}catch(e){console.warn('render after save error',e)}try{toggleDealerFields()}catch(e){}try{fillDocDealerMeds()}catch(e){}try{if(typeof renderPlanExpensesProgress==='function')renderPlanExpensesProgress()}catch(e){}try{if(typeof renderStockDealer==='function')renderStockDealer()}catch(e){}}
 function $(id){return document.getElementById(id)}function v(id){return ($(id)||{}).value?.trim()||''}function set(id,x){if($(id))$(id).value=x??''}function n(x){return +x||0}function fmt(x){return n(x).toLocaleString('en-US')}function today(){return new Date().toISOString().slice(0,10)}function mon(){return today().slice(0,7)}
 
 /* الإصلاح الجذري لحماية النصوص (بدون استخدام رموز تسبب أخطاء) */
@@ -562,6 +562,19 @@ function fillDoctorPharmacies(){
   const keep=getSelectedValues('docPharmacies');
   el.innerHTML=(db.pharmacies||[]).map(p=>`<option value="${p.id}">${esc(p.name)}${p.zone?' - '+esc(p.zone):''}</option>`).join('');
   setSelectedValues('docPharmacies',keep);
+}
+
+function pharmacyNames(ids){
+  if(!Array.isArray(ids)){
+    if(!ids)return [];
+    ids=String(ids).split(',').map(x=>x.trim()).filter(Boolean);
+  }
+  const wanted=new Set(ids.map(String));
+  return (db.pharmacies||[]).filter(p=>wanted.has(String(p.id))).map(p=>p.name).filter(Boolean);
+}
+function productImageHtml(m){
+  if(!m || !m.image)return '';
+  return `<img src="${m.image}" class="product-thumb" alt="${esc(m.name||'product')}">`;
 }
 
 function saveDoctor(){if(!v('docName'))return alert('اكتب اسم الطبيب');let old=db.doctors.find(x=>x.id==edit.client),o={id:edit.client||Date.now(),name:v('docName'),doctorType:v('docType'),spec:v('docSpec'),phone:v('docPhone'),zone:v('docZone'),importance:v('docImportance')||'B',products:v('docProducts'),pharmacyIds:getSelectedValues('docPharmacies'),followDate:v('docFollowDate'),followNote:v('docFollowNote'),lat:v('docLat'),lng:v('docLng'),notes:v('docNotes')};old?Object.assign(old,o):db.doctors.unshift(o);saveDealerFromDoctor(o.id);cancelClient(1);save()}
@@ -919,5 +932,111 @@ function makeAiReply(){
   const note=v('aiNote');
   let intro='',tail='';
   if(aiPick.style==='friendly'){intro='حبيبي دكتور، ';tail=' وأني حاضر بأي وقت حتى أتابع وياك الموضوع خطوة بخطوة.';}
-  else if(aiPick.style==='short'){intro='دكتور، ';tail=' الخلاصة: نجربه على الحالات المناسبة والحكم يكون
-تم اقتطاع المعاينة لأن الملف كبير
+  else if(aiPick.style==='short'){intro='دكتور، ';tail=' الخلاصة: نجربه على الحالات المناسبة والحكم يكون على النتيجة.';}
+  else if(aiPick.style==='strong'){intro='دكتور، بصراحة وبدون مبالغة، ';tail=' لأن المنتج القوي يثبت نفسه بالتجربة، مو بالكلام فقط.';}
+  else if(aiPick.style==='doctor'){intro='دكتور، من الناحية العملية، ';tail=' ونخليه خيار للحالات اللي تحتاج ثبات واستجابة أفضل.';}
+  else if(aiPick.style==='pharmacy'){intro='أستاذي العزيز، ';tail=' وهذا يساعدك توفر خيار مطلوب ومقنع للزبون بدون إحراج.';}
+  else if(aiPick.style==='whatsapp'){intro='دكتور العزيز، ';tail=' تحياتي إلك، وأي ملاحظة أني حاضر.';}
+  else if(aiPick.style==='formal'){intro='دكتورنا الفاضل، ';tail=' مع خالص التقدير والاحترام.';}
+  else {intro='دكتور، ';tail=' وإذا تحب نرتب تجربة بسيطة حتى تكون القناعة مبنية على نتيجة واضحة.';}
+  const extra=note?`\n\nوبالنسبة للملاحظة التي ذكرتها: ${note}، راح أتعامل وياها بجدية وأرتب لك الحل الأنسب حسب الحالة والاحتياج.`:'';
+  aiPick.last=(intro+t.base+extra+tail).replace(/\s+/g,' ').replace(/\. /g,'.\n').trim();
+  if($('aiReplyOut'))$('aiReplyOut').textContent=aiPick.last;
+}
+function copyAiReply(){
+  const text=aiPick.last||($('aiReplyOut')?$('aiReplyOut').textContent:'');
+  if(!text||text.includes('اكتب ملاحظة'))return alert('ولّد الرد أولاً');
+  const done=()=>alert('تم النسخ');
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}
+  else fallbackCopy(text,done);
+}
+function fallbackCopy(text,cb){
+  const ta=document.createElement('textarea');
+  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);
+  ta.focus();ta.select();document.execCommand('copy');ta.remove();cb&&cb();
+}
+
+/* التحكم بالثيم (فاتح/داكن) */
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',cur);
+  localStorage.setItem('medrep_theme',cur);
+  const b=document.querySelector('.theme-toggle'); if(b)b.textContent=cur==='dark'?'☀':'☾';
+}
+
+/* تسجيل الدخول والتفعيل المحلي - أوفلاين */
+const AUTH_KEY='medrep_offline_license_v1';
+const DEVICE_KEY='medrep_device_id_v1';
+const APP_SECRET='MRFLOW-LOCAL-2026';
+function cleanCode(x){return String(x||'').toUpperCase().replace(/[^A-Z0-9]/g,'')}
+function strongHash(str){let h1=0xdeadbeef,h2=0x41c6ce57,h3=0x9e3779b9;str=String(str||'');for(let i=0;i<str.length;i++){let ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);h3=Math.imul(h3^ch,2246822507);}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h3^(h3>>>13),3266489909);h3=Math.imul(h3^(h3>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return [(h1>>>0),(h2>>>0),(h3>>>0)].map(x=>x.toString(36).toUpperCase().padStart(7,'0')).join('')}
+function makeActivationCode(user,pass,device){let raw=[String(user||'').trim().toLowerCase(),String(pass||''),String(device||''),APP_SECRET].join('|');let mix=strongHash(raw)+'-'+strongHash(raw.split('').reverse().join('|'));let c=cleanCode(mix).slice(0,24);return 'MRF-'+c.match(/.{1,4}/g).join('-')}
+function setStableDeviceId(id){
+  id=String(id||'').trim();
+  if(!id || id==='UNKNOWN_DEVICE' || id==='----') return '';
+  try{localStorage.setItem(DEVICE_KEY,id)}catch(e){}
+  window.MEDREP_ANDROID_DEVICE_ID=id;
+  const box=$('deviceIdBox');
+  if(box) box.textContent=id;
+  return id;
+}
+function getDeviceId(){
+  try{if(window.MEDREP_ANDROID_DEVICE_ID){let x=setStableDeviceId(window.MEDREP_ANDROID_DEVICE_ID);if(x)return x}}catch(e){}
+  try{
+    if(window.Android && typeof Android.getDeviceId==='function'){
+      let x=setStableDeviceId(Android.getDeviceId());
+      if(x)return x;
+    }
+  }catch(e){}
+  try{let x=localStorage.getItem(DEVICE_KEY);if(x&&String(x).trim())return String(x).trim()}catch(e){}
+  let id='MR-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  return setStableDeviceId(id)||id;
+}
+function refreshDeviceBox(){
+  const box=$('deviceIdBox');
+  if(box) box.textContent=getDeviceId();
+}
+window.medrepSetDeviceId=function(id){return setStableDeviceId(id)};
+function getLicense(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||'null')}catch(e){return null}}
+function saveLicense(obj){localStorage.setItem(AUTH_KEY,JSON.stringify(obj));try{if(window.Android&&Android.saveLicense)Android.saveLicense(JSON.stringify(obj))}catch(e){}}
+function validLicense(){let l=getLicense(),d=getDeviceId();return !!(l&&l.activated&&l.deviceId===d&&l.username)}
+function showAppSplash(){let sp=$('appSplash');if(!sp)return;sp.classList.remove('hide');setTimeout(()=>sp.classList.add('hide'),2000)}
+function unlockApp(withSplash){document.body.classList.remove('auth-lock');try{render();applyLang(currentLang())}catch(e){}if(withSplash)showAppSplash()}
+function lockApp(){document.body.classList.add('auth-lock');refreshDeviceBox();setTimeout(refreshDeviceBox,250);setTimeout(refreshDeviceBox,1000)}
+function checkAuth(){if(validLicense())unlockApp();else lockApp()}
+function activateOfflineLogin(){let u=v('loginUser'),p=v('loginPass'),c=cleanCode(v('loginCode')),d=getDeviceId(),msg=$('authMsg');if(msg)msg.textContent='';if(!u||!p||!c){if(msg)msg.textContent='اكتب اسم المستخدم وكلمة المرور وكود التفعيل';return}let correct=cleanCode(makeActivationCode(u,p,d));if(c!==correct){if(msg)msg.textContent='كود التفعيل غير صحيح لهذا الجهاز';return}saveLicense({username:u,deviceId:d,activated:true,activatedAt:new Date().toISOString()});set('loginPass','');set('loginCode','');unlockApp(true)}
+function copyDeviceId(){let d=getDeviceId();navigator.clipboard?.writeText(d);alert('تم نسخ رقم الجهاز')}
+function logoutApp(){if(confirm('هل تريد تسجيل الخروج وإظهار شاشة التفعيل؟')){localStorage.removeItem(AUTH_KEY);lockApp()}}
+
+function initTheme(){
+  const cur=localStorage.getItem('medrep_theme')||'light';
+  document.documentElement.setAttribute('data-theme',cur);
+  const b=document.querySelector('.theme-toggle'); if(b)b.textContent=cur==='dark'?'☀':'☾';
+}
+
+/* تهيئة التطبيق عند البداية */
+initTheme();
+checkAuth();
+try{render()}catch(e){console.warn('render init error',e)}
+try{moreTab('settings')}catch(e){}
+try{clientTab('doctor')}catch(e){}
+if(typeof renderPlanExpensesProgress==='function')try{renderPlanExpensesProgress()}catch(e){}
+if(typeof renderStockDealer==='function')try{renderStockDealer()}catch(e){}
+setTimeout(refreshDeviceBox,100);
+setTimeout(refreshDeviceBox,500);
+setTimeout(refreshDeviceBox,1500);
+</script>
+<script id="lang-switch-script">
+const I18N={"en": {"نظام المندوب العلمي": "Medical Representative System", "طلبيات، زيارات، عملاء، تاركت": "Orders, visits, clients, target", "لوحة التحكم": "Dashboard", "مندوب علمي": "Medical representative", "أكمل بياناتك من المزيد": "Complete your details from More", "الرئيسية": "Home", "الطلبيات": "Orders", "العملاء": "Clients", "المزيد": "More", "إضافة": "Add", "إضافة سريع": "Quick add", "طلبية جديدة": "New order", "تسجيل بيع أو طلبية": "Record sale or order", "زيارة": "Visit", "تسجيل زيارة فقط": "Record visit only", "طبيب": "Doctor", "إضافة طبيب جديد": "Add new doctor", "صيدلية": "Pharmacy", "إضافة صيدلية جديدة": "Add new pharmacy", "منتج": "Medicine", "إضافة مادة جديدة": "Add new item", "مخزون": "Stock", "المخزون": "Stock", "سامبلات / فري": "Samples / Free items", "مصروف": "Expense", "وقود أو ضيافة": "Fuel or hospitality", "خط سير": "Route plan", "إضافة عميل للخطة": "Add client to plan", "إلغاء": "Cancel", "المطلوب": "Required", "المتحقق": "Achieved", "طلبيات اليوم": "Today's orders", "متابعات اليوم": "Today's follow-ups", "آخر الطلبيات": "Latest orders", "مؤشرات سريعة": "Quick indicators", "أكثر المنتجات مبيعاً والمصاريف اليومية": "Top-selling medicines and daily expenses", "لا توجد طلبيات بعد": "No orders yet", "لا توجد مبيعات مؤكدة": "No confirmed sales", "مصاريف اليوم": "Today's expenses", "طلبية": "Order", "تعديل طلبية": "Edit order", "اختر العميل": "Select client", "اختر منتج حتى تظهر تفاصيله هنا.": "Select a medicine to show details here.", "اسم المنتج": "Product name", "الكمية": "Quantity", "بونص مجاني": "Free bonus", "سعر المفرد": "Unit price", "خصم بالدينار": "Discount in IQD", "ملاحظات الطلبية": "Order notes", "الصافي": "Net", "البونص": "Bonus", "تنحسب على التاركت": "Counts toward target", "لا تنحسب على التاركت": "Does not count toward target", "حفظ الطلبية": "Save order", "إلغاء التعديل": "Cancel edit", "كل الحالات": "All statuses", "بيع مؤكد": "Confirmed sale", "تم التسليم": "Delivered", "ملغي": "Cancelled", "بحث": "Search", "تعديل": "Edit", "حذف": "Delete", "تسجيل زيارة": "Record visit", "ملاحظات الزيارة فقط": "Visit notes only", "حفظ الزيارة": "Save visit", "الطلبية صارت قسم مستقل، هنا فقط تسجيل زيارة وملاحظات.": "Orders are now separate; this screen is only for visits and notes.", "سجل الزيارات": "Visit log", "تمت": "Done", "لم تتم": "Not done", "مؤجلة": "Postponed", "يحتاج متابعة": "Needs follow-up", "الأطباء": "Doctors", "الصيدليات": "Pharmacies", "إضافة طبيب": "Add doctor", "اسم الطبيب": "Doctor name", "علمي": "Scientific", "ديلر": "Dealer", "الاختصاص": "Specialty", "الهاتف": "Phone", "الزون": "Zone", "تفاصيل الديلر": "Dealer details", "المادة المطلوبة": "Required item", "نوع الاحتياج": "Need type", "ديل": "Deal", "كسرة": "Break / discount", "سفرة": "Trip", "هدية": "Gift", "دعم": "Support", "أخرى": "Other", "القيمة / العدد": "Value / count", "ملاحظة الديلر": "Dealer note", "مثال: 10 سامبل أو 50,000": "Example: 10 samples or 50,000", "تفاصيل الاتفاق أو الحاجة": "Deal or need details", "المنتجات المهتم بها": "Interested products", "ملاحظة المتابعة": "Follow-up note", "ملاحظات": "Notes", "تثبيت الموقع": "Pin location", "حفظ الطبيب": "Save doctor", "إضافة صيدلية": "Add pharmacy", "اسم الصيدلية": "Pharmacy name", "المسؤول": "Responsible person", "حفظ الصيدلية": "Save pharmacy", "قائمة العملاء": "Client list", "فلتر الزون": "Zone filter", "خريطة": "Map", "الإعدادات": "Settings", "المنتجات": "Medicines", "المصاريف": "Expenses", "التقارير": "Reports", "إعدادات المندوب": "Representative settings", "اسم المندوب": "Representative name", "الوظيفة": "Job title", "الشركة": "Company", "الشركة الافتراضية للأدوية": "Default medicine company", "أسلوب تقرير مختصر": "Short report style", "أسلوب تقرير إداري": "Administrative report style", "أسلوب تقرير تفصيلي": "Detailed report style", "حفظ الإعدادات": "Save settings", "تاركت الشهر": "Monthly target", "قيمة التاركت": "Target value", "مبلغ يدوي إضافي اختياري": "Optional manual achieved amount", "حفظ التاركت": "Save target", "نسخ وتصدير": "Backup and export", "تصدير JSON": "Export JSON", "تصدير CSV": "Export CSV", "إضافة منتج": "Add medicine", "اسم المنتج": "Medicine name", "الاسم العلمي": "Scientific name", "السعر": "Price", "الجرعة / الشكل": "Dose / form", "شرح المنتج": "Medicine description", "نقاط البيع": "Selling points", "حفظ المنتج": "Save medicine", "قائمة المنتجات": "Medicine list", "بدون علمي": "No scientific name", "PDF": "PDF", "خط السير اليومي": "Daily route plan", "رتب العملاء حسب الزون وحولهم مباشرة إلى زيارة فعلية.": "Arrange clients by zone and convert them directly to actual visits.", "إضافة إلى خط السير": "Add to route plan", "تحويل لزيارة": "Convert to visit", "لا توجد خطة لهذا اليوم": "No plan for this day", "المصاريف اليومية": "Daily expenses", "المبلغ": "Amount", "وقود": "Fuel", "ضيافة": "Hospitality", "اتصالات": "Communications", "نثرية": "Miscellaneous", "حفظ المصروف": "Save expense", "لا توجد مصاريف لهذا اليوم": "No expenses for this day", "المخزون الخاص": "Private stock", "اكتب السامبلات والفري بخانة واحدة حتى تبقى مرنة.": "Write samples and free items in one flexible field.", "سامبلات / فري - مثال: 10 سامبلات + 5 فري": "Samples / free - example: 10 samples + 5 free", "حفظ المخزون": "Save stock", "لا يوجد مخزون محفوظ": "No saved stock", "تقرير جاهز": "Ready report", "تكوين تقرير اليوم": "Generate today's report", "التقرير يظهر هنا": "The report appears here", "نسخ": "Copy", "حفظ": "Save", "التقارير المحفوظة": "Saved reports", "لا توجد تقارير": "No reports", "اختر المنتج": "Select medicine", "اختر المادة": "Select item", "غير محدد": "Not specified", "بدون زون": "No zone", "بدون منتج": "No product", "لا توجد طلبيات": "No orders", "لا توجد زيارات": "No visits", "لا توجد نتائج": "No results", "لا توجد أدوية": "No medicines", "د.ع": "IQD", "الشهر": "Month", "النسبة": "Percentage", "المتبقي": "Remaining", "التاركت": "Target", "البيع المحسوب على التاركت": "Sales counted toward target", "إجمالي المصاريف": "Total expenses", "الملخص": "Summary", "الزيارات": "Visits", "الإجراء القادم": "Next action", "تم حفظ الإعدادات": "Settings saved", "تم حفظ التاركت": "Target saved", "تم النسخ": "Copied", "كوّن التقرير أولاً": "Generate the report first", "اكتب اسم المنتج": "Enter medicine name", "اكتب اسم الطبيب": "Enter doctor name", "اكتب اسم الصيدلية": "Enter pharmacy name", "اكتب المبلغ": "Enter amount", "لا يوجد موقع محفوظ": "No saved location", "تم تثبيت الموقع": "Location pinned", "تعذر جلب الموقع": "Could not get location", "الموقع لا يعمل من ملف مباشر. ارفعه على HTTPS أو اكتب الإحداثيات يدوياً.": "Location does not work from a direct file. Upload to HTTPS or enter coordinates manually.", "حذف؟": "Delete?", "ملف غير صالح": "Invalid file", "تم الاستيراد": "Imported", "عربي": "Arabic", "کوردی": "Kurdish"}, "ku": {"نظام المندوب العلمي": "سیستەمی نوێنەری زانستی", "طلبيات، زيارات، عملاء، تاركت": "داواکاری، سەردان، کڕیار، تارگێت", "لوحة التحكم": "داشبۆرد", "مندوب علمي": "نوێنەری زانستی", "أكمل بياناتك من المزيد": "زانیارییەکانت لە بەشی زیاتر تەواو بکە", "الرئيسية": "سەرەکی", "الطلبيات": "داواکارییەکان", "العملاء": "کڕیارەکان", "المزيد": "زیاتر", "إضافة": "زیادکردن", "إضافة سريع": "زیادکردنی خێرا", "طلبية جديدة": "داواکاری نوێ", "تسجيل بيع أو طلبية": "فرۆشتن یان داواکاری تۆمار بکە", "زيارة": "سەردان", "تسجيل زيارة فقط": "تەنها سەردان تۆمار بکە", "طبيب": "پزیشک", "إضافة طبيب جديد": "پزیشکی نوێ زیاد بکە", "صيدلية": "دەرمانخانە", "إضافة صيدلية جديدة": "دەرمانخانەی نوێ زیاد بکە", "منتج": "دەرمان", "إضافة مادة جديدة": "مادەی نوێ زیاد بکە", "مخزون": "کۆگا", "المخزون": "کۆگا", "سامبلات / فري": "سامپڵ / فری", "مصروف": "خەرجی", "وقود أو ضيافة": "سووتەمەنی یان میوانداری", "خط سير": "ڕێڕەوی کار", "إضافة عميل للخطة": "کڕیار بۆ پلان زیاد بکە", "إلغاء": "هەڵوەشاندنەوە", "المطلوب": "پێویست", "المتحقق": "بەدەستهاتوو", "طلبيات اليوم": "داواکارییەکانی ئەمڕۆ", "متابعات اليوم": "بەدواداچوونەکانی ئەمڕۆ", "آخر الطلبيات": "دوایین داواکارییەکان", "مؤشرات سريعة": "نیشاندەرە خێراکان", "أكثر المنتجات مبيعاً والمصاريف اليومية": "زۆرترین دەرمانی فرۆشراو و خەرجی ڕۆژانە", "لا توجد طلبيات بعد": "هێشتا داواکاری نییە", "لا توجد مبيعات مؤكدة": "فرۆشتنی پشتڕاستکراو نییە", "مصاريف اليوم": "خەرجی ئەمڕۆ", "طلبية": "داواکاری", "تعديل طلبية": "دەستکاری داواکاری", "اختر العميل": "کڕیار هەڵبژێرە", "اختر منتج حتى تظهر تفاصيله هنا.": "دەرمانێک هەڵبژێرە بۆ ئەوەی وردەکارییەکان لێرە دەربکەون.", "اسم المنتج": "ناوی بەرهەم", "الكمية": "بڕ", "بونص مجاني": "بۆنەسی بێبەرامبەر", "سعر المفرد": "نرخی یەکە", "خصم بالدينار": "داشکاندن بە دینار", "ملاحظات الطلبية": "تێبینی داواکاری", "الصافي": "پاڵاوکراوە", "البونص": "بۆنەس", "تنحسب على التاركت": "بۆ تارگێت هەژمار دەکرێت", "لا تنحسب على التاركت": "بۆ تارگێت هەژمار ناکرێت", "حفظ الطلبية": "داواکاری پاشەکەوت بکە", "إلغاء التعديل": "دەستکاری هەڵبوەشێنەوە", "كل الحالات": "هەموو دۆخەکان", "بيع مؤكد": "فرۆشتنی پشتڕاستکراو", "تم التسليم": "گەیەندرا", "ملغي": "هەڵوەشاوە", "بحث": "گەڕان", "تعديل": "دەستکاری", "حذف": "سڕینەوە", "تسجيل زيارة": "سەردان تۆمار بکە", "ملاحظات الزيارة فقط": "تەنها تێبینی سەردان", "حفظ الزيارة": "سەردان پاشەکەوت بکە", "الطلبية صارت قسم مستقل، هنا فقط تسجيل زيارة وملاحظات.": "داواکاری ئێستا بەشێکی سەربەخۆیە؛ لێرە تەنها سەردان و تێبینی تۆمار دەکرێت.", "سجل الزيارات": "تۆماری سەردانەکان", "تمت": "ئەنجامدرا", "لم تتم": "ئەنجام نەدرا", "مؤجلة": "دواخراوە", "يحتاج متابعة": "پێویستی بەدواداچوونە", "الأطباء": "پزیشکەکان", "الصيدليات": "دەرمانخانەکان", "إضافة طبيب": "پزیشک زیاد بکە", "اسم الطبيب": "ناوی پزیشک", "علمي": "زانستی", "ديلر": "دیلەر", "الاختصاص": "پسپۆڕی", "الهاتف": "ژمارەی مۆبایل", "الزون": "زۆن", "تفاصيل الديلر": "وردەکاریی دیلەر", "المادة المطلوبة": "مادەی داواکراو", "نوع الاحتياج": "جۆری پێویستی", "ديل": "دیل", "كسرة": "کسرە", "سفرة": "گەشت", "هدية": "دیاری", "دعم": "پشتیوانی", "أخرى": "هی تر", "القيمة / العدد": "بها / ژمارە", "ملاحظة الديلر": "تێبینی دیلەر", "مثال: 10 سامبل أو 50,000": "نموونە: ١٠ سامپڵ یان ٥٠,٠٠٠", "تفاصيل الاتفاق أو الحاجة": "وردەکاری ڕێککەوتن یان پێویستی", "المنتجات المهتم بها": "بەرهەمە گرنگەکان", "ملاحظة المتابعة": "تێبینی بەدواداچوون", "ملاحظات": "تێبینییەکان", "تثبيت الموقع": "شوێن دیاری بکە", "حفظ الطبيب": "پزیشک پاشەکەوت بکە", "إضافة صيدلية": "دەرمانخانە زیاد بکە", "اسم الصيدلية": "ناوی دەرمانخانە", "المسؤول": "بەرپرس", "حفظ الصيدلية": "دەرمانخانە پاشەکەوت بکە", "قائمة العملاء": "لیستی کڕیاران", "فلتر الزون": "فلتەری زۆن", "خريطة": "نەخشە", "الإعدادات": "ڕێکخستنەکان", "المنتجات": "دەرمانەکان", "المصاريف": "خەرجییەکان", "التقارير": "ڕاپۆرتەکان", "إعدادات المندوب": "ڕێکخستنی نوێنەر", "اسم المندوب": "ناوی نوێنەر", "الوظيفة": "پیشە", "الشركة": "کۆمپانیا", "الشركة الافتراضية للأدوية": "کۆمپانیای بنەڕەتی بۆ دەرمانەکان", "أسلوب تقرير مختصر": "شێوازی ڕاپۆرتی کورت", "أسلوب تقرير إداري": "شێوازی ڕاپۆرتی ئیداری", "أسلوب تقرير تفصيلي": "شێوازی ڕاپۆرتی ورد", "حفظ الإعدادات": "ڕێکخستنەکان پاشەکەوت بکە", "تاركت الشهر": "تارگێتی مانگانە", "قيمة التاركت": "بەهای تارگێت", "مبلغ يدوي إضافي اختياري": "بڕی دەستی زیادە بە ئارەزوو", "حفظ التاركت": "تارگێت پاشەکەوت بکە", "نسخ وتصدير": "کۆپی و هەناردە", "تصدير JSON": "هەناردەی JSON", "تصدير CSV": "هەناردەی CSV", "إضافة منتج": "دەرمان زیاد بکە", "اسم المنتج": "ناوی دەرمان", "الاسم العلمي": "ناوی زانستی", "السعر": "نرخ", "الجرعة / الشكل": "دۆز / شێوە", "شرح المنتج": "ڕوونکردنەوەی دەرمان", "نقاط البيع": "خاڵەکانی فرۆشتن", "حفظ المنتج": "دەرمان پاشەکەوت بکە", "قائمة المنتجات": "لیستی دەرمانەکان", "بدون علمي": "ناوی زانستی نییە", "PDF": "PDF", "خط السير اليومي": "ڕێڕەوی ڕۆژانە", "رتب العملاء حسب الزون وحولهم مباشرة إلى زيارة فعلية.": "کڕیارەکان بە زۆن ڕێکبخە و ڕاستەوخۆ بیانگۆڕە بۆ سەردانی ڕاستەقینە.", "إضافة إلى خط السير": "زیادکردن بۆ ڕێڕەو", "تحويل لزيارة": "گۆڕین بۆ سەردان", "لا توجد خطة لهذا اليوم": "بۆ ئەم ڕۆژە پلان نییە", "المصاريف اليومية": "خەرجی ڕۆژانە", "المبلغ": "بڕ", "وقود": "سووتەمەنی", "ضيافة": "میوانداری", "اتصالات": "پەیوەندییەکان", "نثرية": "خەرجی ورد", "حفظ المصروف": "خەرجی پاشەکەوت بکە", "لا توجد مصاريف لهذا اليوم": "بۆ ئەم ڕۆژە خەرجی نییە", "المخزون الخاص": "کۆگای تایبەت", "اكتب السامبلات والفري بخانة واحدة حتى تبقى مرنة.": "سامپڵ و فری لە یەک خانە بنووسە بۆ ئەوەی ئاسان بێت.", "سامبلات / فري - مثال: 10 سامبلات + 5 فري": "سامپڵ / فری - نموونە: ١٠ سامپڵ + ٥ فری", "حفظ المخزون": "کۆگا پاشەکەوت بکە", "لا يوجد مخزون محفوظ": "کۆگای پاشەکەوتکراو نییە", "تقرير جاهز": "ڕاپۆرتی ئامادە", "تكوين تقرير اليوم": "ڕاپۆرتی ئەمڕۆ دروست بکە", "التقرير يظهر هنا": "ڕاپۆرتەکە لێرە دەردەکەوێت", "نسخ": "کۆپی", "حفظ": "پاشەکەوت", "التقارير المحفوظة": "ڕاپۆرتە پاشەکەوتکراوەکان", "لا توجد تقارير": "ڕاپۆرت نییە", "اختر المنتج": "دەرمان هەڵبژێرە", "اختر المادة": "مادە هەڵبژێرە", "غير محدد": "دیاری نەکراو", "بدون زون": "بێ زۆن", "بدون منتج": "بێ بەرهەم", "لا توجد طلبيات": "داواکاری نییە", "لا توجد زيارات": "سەردان نییە", "لا توجد نتائج": "ئەنجام نییە", "لا توجد أدوية": "دەرمان نییە", "د.ع": "د.ع", "الشهر": "مانگ", "النسبة": "ڕێژە", "المتبقي": "ماوە", "التاركت": "تارگێت", "البيع المحسوب على التاركت": "فرۆشتنی هەژمارکراو بۆ تارگێت", "إجمالي المصاريف": "کۆی خەرجی", "الملخص": "پوختە", "الزيارات": "سەردانەکان", "الإجراء القادم": "هەنگاوی داهاتوو", "تم حفظ الإعدادات": "ڕێکخستنەکان پاشەکەوت کران", "تم حفظ التاركت": "تارگێت پاشەکەوت کرا", "تم النسخ": "کۆپی کرا", "كوّن التقرير أولاً": "سەرەتا ڕاپۆرتەکە دروست بکە", "اكتب اسم المنتج": "ناوی دەرمان بنووسە", "اكتب اسم الطبيب": "ناوی پزیشک بنووسە", "اكتب اسم الصيدلية": "ناوی دەرمانخانە بنووسە", "اكتب المبلغ": "بڕەکە بنووسە", "لا يوجد موقع محفوظ": "شوێنی پاشەکەوتکراو نییە", "تم تثبيت الموقع": "شوێن دیاری کرا", "تعذر جلب الموقع": "نەتوانرا شوێن وەربگیرێت", "الموقع لا يعمل من ملف مباشر. ارفعه على HTTPS أو اكتب الإحداثيات يدوياً.": "شوێن لە فایلێکی ڕاستەوخۆ کار ناکات. بیخە سەر HTTPS یان کۆئۆردیناتەکان دەستی بنووسە.", "حذف؟": "بسڕدرێتەوە؟", "ملف غير صالح": "فایلی نادروست", "تم الاستيراد": "هاوردە کرا", "عربي": "عەرەبی", "کوردی": "کوردی"}};
+function currentLang(){return localStorage.getItem('medrep_lang')||'ar'}
+function trText(str,lang=currentLang()){if(!str||lang==='ar')return str;const dict=I18N[lang]||{};if(dict[str])return dict[str];let out=String(str);Object.keys(dict).sort((a,b)=>b.length-a.length).forEach(k=>{if(k&&out.includes(k))out=out.split(k).join(dict[k]);});return out;}
+function markAndTranslateNode(node,lang){if(!node||!node.nodeValue||!node.nodeValue.trim())return;const p=node.parentElement;if(!p||['SCRIPT','STYLE','TEXTAREA','INPUT','OPTION'].includes(p.tagName))return;if(!node._baseText)node._baseText=node.nodeValue;node.nodeValue=trText(node._baseText,lang);}
+function applyLang(lang=currentLang()){localStorage.setItem('medrep_lang',lang);document.documentElement.lang=lang==='ku'?'ckb':lang;document.documentElement.dir=lang==='en'?'ltr':'rtl';document.body.dir=document.documentElement.dir;document.querySelectorAll('#langBar button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));document.querySelectorAll('input,textarea').forEach(el=>{if(el.placeholder){if(!el.dataset.phBase)el.dataset.phBase=el.placeholder;el.placeholder=trText(el.dataset.phBase,lang);}});document.querySelectorAll('button,title,h1,h2,h3,p,span,small,strong,b,label,option,div.badge,div.total,div.empty').forEach(el=>{if(el.tagName==='OPTION'){if(!el.dataset.baseText){el.dataset.baseText=el.textContent;if(!el.hasAttribute('value'))el.value=el.dataset.baseText;}el.textContent=trText(el.dataset.baseText,lang);return;}if(el.childNodes.length===1&&el.childNodes[0].nodeType===3){if(!el.dataset.baseText)el.dataset.baseText=el.textContent;el.textContent=trText(el.dataset.baseText,lang);}});const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode(n){return n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});let node;while(node=walker.nextNode())markAndTranslateNode(node,lang);}
+function setLang(lang){applyLang(lang)}
+const _oldAlert=window.alert;window.alert=function(msg){_oldAlert(trText(String(msg),currentLang()))};
+function wrapI18n(name){const old=window[name];if(typeof old==='function'&&!old._i18nWrapped){window[name]=function(...args){const r=old.apply(this,args);setTimeout(()=>applyLang(currentLang()),0);return r};window[name]._i18nWrapped=true;}}
+['render','go','moreTab','clientTab','sheet','fillOrderClients','fillVisitClients','fillPlanClients','medToOrder','calcOrder','dayReport','cancelMed','editMed'].forEach(wrapI18n);
+setTimeout(()=>applyLang(currentLang()),80);
+</script>
+</body>
+</html>
