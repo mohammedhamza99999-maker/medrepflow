@@ -234,6 +234,52 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
 .splash-box{animation:splashPop .75s ease both}.splash-box img{width:170px;height:170px;border-radius:38px;object-fit:cover;background:#fff;box-shadow:0 20px 45px rgba(21,94,239,.16);animation:splashFloat 1.7s ease-in-out infinite}.splash-box h1{font-size:31px;margin:18px 0 4px;color:var(--txt);font-weight:900}.splash-box p{color:var(--mut);font-weight:800;margin:0}.splash-line{width:150px;height:6px;background:var(--soft);border-radius:99px;margin:18px auto 0;overflow:hidden}.splash-line i{display:block;height:100%;width:40%;background:linear-gradient(135deg,var(--p),var(--p2));border-radius:99px;animation:splashLoad 1.8s ease-in-out infinite}@keyframes splashPop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}@keyframes splashFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@keyframes splashLoad{0%{transform:translateX(-120%)}100%{transform:translateX(280%)}}
 .app-footer{text-align:center;color:var(--mut);font-size:12px;line-height:1.8;padding:16px 12px 22px}.app-footer a{color:var(--p);font-weight:900;text-decoration:none}.brand-name{font-weight:900;color:var(--txt)}
 
+
+/* مخزن المنتجات التجاري */
+.product-stock-box { background: color-mix(in srgb, var(--p) 7%, var(--card)); border: 1px solid color-mix(in srgb, var(--p) 18%, var(--br)); border-radius: 16px; padding: 10px; margin: 8px 0; }
+.product-stock-box label { display:block; font-size:12px; font-weight:900; color:var(--p); margin-bottom:4px; }
+.stock-badge { display:inline-block; background: color-mix(in srgb, var(--p) 10%, var(--card)); border:1px solid color-mix(in srgb, var(--p) 22%, var(--br)); color:var(--txt); border-radius:999px; padding:6px 10px; margin:3px; font-size:12px; font-weight:900; }
+.stock-badge.low { background: color-mix(in srgb, var(--amber) 13%, var(--card)); border-color: color-mix(in srgb, var(--amber) 32%, var(--br)); color: var(--amber); }
+.stock-badge.out { background: color-mix(in srgb, var(--red) 12%, var(--card)); border-color: color-mix(in srgb, var(--red) 32%, var(--br)); color: var(--red); }
+.stock-count-card { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; border:1px solid var(--br); border-radius:16px; padding:12px; margin:8px 0; background:var(--card); }
+.stock-count-card b { color:var(--txt); }
+.stock-count-card small { color:var(--mut); }
+
+/* قوائم الصيدليات والديلات */
+.deals-mini { border:1px solid var(--br); border-radius:16px; padding:10px; margin:8px 0; background:color-mix(in srgb,var(--p) 5%,var(--card)); }
+.deals-mini b { display:block; color:var(--txt); font-size:13px; margin-bottom:6px; }
+.deals-mini span { display:inline-block; border:1px solid var(--br); background:var(--card); color:var(--txt); border-radius:999px; padding:5px 9px; margin:3px; font-size:11px; font-weight:800; }
+.record-card { border:1px solid var(--br); border-radius:18px; padding:12px; margin:8px 0; background:var(--card); box-shadow:0 4px 12px rgba(15,23,42,.04); }
+.record-card h3 { margin:0 0 6px; font-size:15px; color:var(--txt); }
+.client-file-bg { display:none; position:fixed; inset:0; background:rgba(15,23,42,.48); z-index:90; backdrop-filter:blur(3px); }
+.client-file-bg.on { display:block; }
+.client-file-sheet { display:none; position:fixed; left:0; right:0; bottom:0; z-index:95; max-width:900px; max-height:88vh; overflow-y:auto; margin:auto; background:var(--card); border-radius:30px 30px 0 0; padding:16px 16px 28px; box-shadow:0 -14px 42px rgba(15,23,42,.22); }
+.client-file-sheet.on { display:block; animation:fade .18s ease; }
+.client-file-head { display:flex; align-items:center; gap:10px; justify-content:space-between; margin-bottom:12px; }
+.client-file-head h2 { margin:0; font-size:18px; }
+.close-file { width:42px !important; height:42px !important; padding:0 !important; margin:0 !important; border-radius:14px !important; }
+.file-stats { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:10px 0; }
+.file-stat { border:1px solid var(--br); background:color-mix(in srgb,var(--p) 5%,var(--card)); border-radius:16px; padding:10px; }
+.file-stat span { display:block; color:var(--mut); font-size:11px; font-weight:800; }
+.file-stat b { display:block; color:var(--txt); font-size:18px; margin-top:3px; }
+.file-section { border:1px solid var(--br); border-radius:18px; padding:12px; margin:10px 0; background:var(--card); }
+.file-section h3 { margin:0 0 10px; font-size:15px; color:var(--txt); }
+.file-record { border:1px solid var(--br); border-radius:14px; padding:10px; margin:7px 0; background:color-mix(in srgb,var(--p) 4%,var(--card)); }
+.file-record b { color:var(--txt); }
+.file-record small { display:block; color:var(--mut); line-height:1.7; }
+.product-mini-row { display:flex; justify-content:space-between; gap:8px; align-items:center; border:1px solid var(--br); border-radius:14px; padding:9px 10px; margin:6px 0; background:var(--card); }
+.product-mini-row span { color:var(--mut); font-size:12px; font-weight:800; }
+.inline-mini-form { display:grid; gap:8px; }
+.inline-mini-form .row { margin:0; }
+@media(max-width:430px){ .file-stats { grid-template-columns:1fr; } }
+
+.record-row { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; }
+.record-row span { background:color-mix(in srgb,var(--p) 8%,var(--card)); border:1px solid color-mix(in srgb,var(--p) 16%,var(--br)); color:var(--txt); border-radius:999px; padding:5px 9px; font-size:11px; font-weight:800; }
+.status-pill { border-radius:999px; padding:5px 10px; font-size:11px; font-weight:900; display:inline-block; }
+.status-pill.due { background:color-mix(in srgb,var(--red) 11%,var(--card)); color:var(--red); border:1px solid color-mix(in srgb,var(--red) 28%,var(--br)); }
+.status-pill.pay { background:color-mix(in srgb,var(--amber) 13%,var(--card)); color:var(--amber); border:1px solid color-mix(in srgb,var(--amber) 30%,var(--br)); }
+.status-pill.done { background:color-mix(in srgb,var(--p) 10%,var(--card)); color:var(--p); border:1px solid color-mix(in srgb,var(--p) 25%,var(--br)); }
+
 </style>
 </head><body class="auth-lock">
 
@@ -292,7 +338,7 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
 </section>
 
 <section id="orders" class="page">
-<div class="grid"><div class="card"><h2 id="orderTitle">طلبية جديدة</h2><input id="orderDate" type="date"><div class="row"><select id="orderClientType" onchange="fillOrderClients()"><option value="pharmacy">صيدلية</option><option value="doctor">طبيب</option></select><select id="orderClient"></select></div><select id="orderMed" onchange="medToOrder()"></select><input id="orderProduct" placeholder="اسم المنتج"><div id="orderMedInfo" class="total muted">اختر منتج حتى تظهر تفاصيله هنا.</div><div class="row"><input id="orderQty" type="number" placeholder="الكمية" oninput="calcOrder()"><input id="orderBonus" type="number" placeholder="بونص مجاني" oninput="calcOrder()"></div><div class="row"><input id="orderPrice" type="number" placeholder="سعر المفرد" oninput="calcOrder()" onblur="autoZero(this)"><input id="orderDiscount" type="number" placeholder="خصم بالدينار" oninput="calcOrder()" onblur="autoZero(this)"></div><select id="orderStatus" onchange="calcOrder()"><option>طلبية جديدة</option><option>بيع مؤكد</option><option>تم التسليم</option><option>ملغي</option></select><textarea id="orderNote" placeholder="ملاحظات الطلبية"></textarea><div id="orderCalc" class="total">الصافي: 0 د.ع</div><button type="button" onclick="saveOrder()">حفظ الطلبية</button><button type="button" id="orderCancel" class="ghost hide" onclick="cancelOrder()">إلغاء التعديل</button></div>
+<div class="grid"><div class="card"><h2 id="orderTitle">طلبية جديدة</h2><input id="orderDate" type="date"><div class="row"><select id="orderClientType" onchange="fillOrderClients()"><option value="pharmacy">صيدلية</option><option value="doctor">طبيب</option></select><select id="orderClient"></select></div><select id="orderMed" onchange="medToOrder()"></select><input id="orderProduct" placeholder="اسم المنتج"><div id="orderMedInfo" class="total muted">اختر منتج حتى تظهر تفاصيله هنا.</div><div class="row"><input id="orderQty" type="number" placeholder="الكمية" oninput="calcOrder()"><input id="orderBonus" type="number" placeholder="عدد البونصات / الفري" oninput="calcOrder()"></div><div class="row"><input id="orderPrice" type="number" placeholder="سعر المفرد" oninput="calcOrder()" onblur="autoZero(this)"><input id="orderDiscount" type="number" placeholder="خصم بالدينار" oninput="calcOrder()" onblur="autoZero(this)"></div><div class="row"><select id="orderSource" onchange="orderSourceChanged()"><option value="مباشر">طلبية مباشرة</option><option value="من مذخر">طلبية من مذخر</option></select><select id="orderDelivery" onchange="calcOrder()"><option>تم التوصيل</option><option>لم يتم التوصيل</option></select></div><div class="row"><select id="orderStatus" onchange="calcOrder()"><option>طلبية جديدة</option><option>بيع مؤكد</option><option>تم التسليم</option><option>ملغي</option></select><input id="orderPaid" type="number" placeholder="المبلغ المدفوع" oninput="calcOrder()" onblur="autoZero(this)"></div><textarea id="orderNote" placeholder="ملاحظات الطلبية"></textarea><div id="orderCalc" class="total">الصافي: 0 د.ع</div><button type="button" onclick="saveOrder()">حفظ الطلبية</button><button type="button" id="orderCancel" class="ghost hide" onclick="cancelOrder()">إلغاء التعديل</button></div>
 <div class="card"><h2>الطلبيات</h2><div class="row"><input id="orderSearch" oninput="render()" placeholder="بحث"><select id="orderFilter" onchange="render()"><option value="">كل الحالات</option><option>طلبية جديدة</option><option>بيع مؤكد</option><option>تم التسليم</option><option>ملغي</option></select></div><div id="orderList"></div></div></div>
 </section>
 
@@ -336,7 +382,7 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
         <input id="repName" placeholder="اسم المندوب">
         <div class="row"><input id="repJob" placeholder="الوظيفة"><input id="repZone" placeholder="الزون"></div>
         <input id="repCompany" placeholder="الشركة">
-        <select id="businessType"><option value="medical">مندوب أدوية</option><option value="commercial">مندوب تجاري</option><option value="cosmetic">مندوب كوزمتك</option></select>
+        <select id="businessType" onchange="applyBusinessMode()"><option value="medical">مندوب أدوية</option><option value="commercial">مندوب تجاري</option></select>
         <input id="defaultMedCompany" placeholder="الشركة الافتراضية / البراند">
         <input id="repPhone" placeholder="الهاتف">
         <select id="reportStyle"><option value="مختصر">أسلوب تقرير مختصر</option><option value="إداري">أسلوب تقرير إداري</option><option value="تفصيلي">أسلوب تقرير تفصيلي</option></select>
@@ -386,6 +432,11 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
             <input id="medPrice" type="number" placeholder="السعر" onblur="autoZero(this)">
             <input id="medDose" placeholder="الجرعة / الموديل / الحجم">
         </div>
+        <div id="productStockBox" class="product-stock-box">
+          <label id="productStockLabel">عدد المنتجات المتوفرة بالمخزن</label>
+          <input id="medStockQty" type="number" min="0" placeholder="مثال: 50">
+          <p class="muted small" id="productStockHint">للمنتجات التجارية: ينقص العدد تلقائياً عند حفظ بيع مؤكد أو تم التسليم.</p>
+        </div>
         <textarea id="medDesc" placeholder="شرح المنتج"></textarea>
         <textarea id="medSelling" placeholder="نقاط البيع"></textarea>
         <button type="button" onclick="saveMed()">حفظ المنتج</button>
@@ -423,10 +474,14 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
 
   <div id="more-stock" class="more-panel">
     <div class="card" id="stockCard">
-      <h2>المخزون الخاص</h2>
-      <p class="muted">اكتب السامبلات والفري بخانة واحدة حتى تبقى مرنة.</p>
-      <select id="stockMed"></select>
-      <input id="stockCombined" placeholder="سامبلات / فري - مثال: 10 سامبلات + 5 فري">
+      <h2 id="stockTitle">المخزون الخاص</h2>
+      <p class="muted" id="stockHelp">للمندوب التجاري: اكتب عدد المنتج المتوفر، وعند البيع ينقص تلقائياً. للمندوب العلمي تقدر تستخدم خانة السامبلات والفري.</p>
+      <select id="stockMed" onchange="stockMedChanged()"></select>
+      <div class="row">
+        <input id="stockQty" type="number" min="0" placeholder="عدد المنتجات المتوفرة">
+        <input id="stockMinQty" type="number" min="0" placeholder="تنبيه عند أقل من">
+      </div>
+      <input id="stockCombined" placeholder="سامبلات / فري / ملاحظات مخزن - مثال: 10 سامبلات + 5 فري">
       <input id="stockNotes" placeholder="ملاحظات">
       <button type="button" onclick="saveStock()">حفظ المخزون</button>
       <div id="stockList" style="margin-top:12px"></div>
@@ -468,6 +523,7 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
     <button type="button" onclick="go('clients');clientTab('pharmacy');sheet(0)"><b>صيدلية</b><span>إضافة صيدلية جديدة</span></button>
     <button type="button" onclick="go('more');moreTab('meds');sheet(0)"><b>منتج</b><span>إضافة مادة جديدة</span></button>
     <button type="button" onclick="go('more');moreTab('stock');sheet(0)"><b>مخزون</b><span>سامبلات / فري</span></button>
+    <button type="button" onclick="go('more');moreTab('deals');sheet(0)"><b>قائمة/ديل</b><span>صيدلية أو طبيب</span></button>
     <button type="button" onclick="go('more');moreTab('expenses');sheet(0)"><b>مصروف</b><span>وقود أو ضيافة</span></button>
     <button type="button" onclick="go('more');moreTab('plan');sheet(0)"><b>خط سير</b><span>إضافة عميل للخطة</span></button>
   </div>
@@ -489,6 +545,13 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
   <button type="button" class="ghost" onclick="aiReplySheet(0)" style="margin-top:10px">إغلاق</button>
 </div>
 
+
+<div id="clientFileBg" class="client-file-bg" onclick="clientFile(0)"></div>
+<div id="clientFileSheet" class="client-file-sheet">
+  <div class="client-file-head"><h2 id="clientFileTitle">ملف العميل</h2><button type="button" class="ghost close-file" onclick="clientFile(0)">×</button></div>
+  <div id="clientFileBody"></div>
+</div>
+
 <nav class="bottom-nav">
   <div class="nav-grid">
     <button type="button" id="nhome" class="nav-btn on" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8Z"/></svg><span>الرئيسية</span></button>
@@ -500,11 +563,11 @@ body:not(.auth-lock) .auth-screen { display:none !important; }
 </nav>
 
 <script>
-const K='medrep_v10_orders_clean',OLD=['medical_rep_mobile_v4','medrep_v9_simple_flow','medrep_v8_orders_target_simple'];let db=load(),edit={order:null,visit:null,client:null,med:null},clientMode='doctor';let medImageData='';
-function def(){return{profile:{},doctors:[],pharmacies:[],medicines:[],orders:[],visits:[],targets:[],reports:[],plans:[],expenses:[],stocks:[],dealerNeeds:[]}}
+const K='medrep_v10_orders_clean',OLD=['medical_rep_mobile_v4','medrep_v9_simple_flow','medrep_v8_orders_target_simple'];let db=load(),edit={order:null,visit:null,client:null,med:null,phList:null,docDeal:null},clientMode='doctor';let medImageData='';
+function def(){return{profile:{},doctors:[],pharmacies:[],medicines:[],orders:[],visits:[],targets:[],reports:[],plans:[],expenses:[],stocks:[],dealerNeeds:[],pharmacyLists:[],doctorDeals:[]}}
 function load(){let x='';try{if(window.Android&&Android.loadAppData){x=Android.loadAppData();if(x)return norm(JSON.parse(x))}}catch(e){}x=localStorage.getItem(K);if(x)try{return norm(JSON.parse(x))}catch(e){};for(let k of OLD){x=localStorage.getItem(k);if(x)try{return norm(JSON.parse(x))}catch(e){}}return def()}
-function norm(d){let b=def();d=d||{};for(let k in b)b[k]=d[k]||b[k];b.doctors=b.doctors.map(x=>({...x,doctorType:x.doctorType||x.docType||'علمي',zone:x.zone||x.area||'',importance:x.importance||'B',followDate:x.followDate||'',followNote:x.followNote||'',lat:x.lat||'',lng:x.lng||'',pharmacyIds:Array.isArray(x.pharmacyIds)?x.pharmacyIds:(x.pharmacyId?[x.pharmacyId]:[])}));b.pharmacies=b.pharmacies.map(x=>({...x,zone:x.zone||x.area||'',importance:x.importance||'B',followDate:x.followDate||'',followNote:x.followNote||'',lat:x.lat||'',lng:x.lng||''}));b.medicines=b.medicines.map(x=>({...x,scientific:x.scientific||x.scientificName||'',selling:x.selling||'',type:x.type||'',image:x.image||''}));b.orders=(b.orders||[]).map(x=>({...x,total:n(x.total)}));return b}
-function save(){let data=JSON.stringify(db);try{localStorage.setItem(K,data)}catch(e){}try{if(window.Android&&Android.saveAppData)Android.saveAppData(data)}catch(e){}render();toggleDealerFields();fillDocDealerMeds();if(typeof renderPlanExpensesProgress==='function')renderPlanExpensesProgress();if(typeof renderStockDealer==='function')renderStockDealer();}
+function norm(d){let b=def();d=d||{};for(let k in b)b[k]=d[k]||b[k];b.doctors=b.doctors.map(x=>({...x,doctorType:x.doctorType||x.docType||'علمي',zone:x.zone||x.area||'',importance:x.importance||'B',followDate:x.followDate||'',followNote:x.followNote||'',lat:x.lat||'',lng:x.lng||'',pharmacyIds:Array.isArray(x.pharmacyIds)?x.pharmacyIds:(x.pharmacyId?[x.pharmacyId]:[])}));b.pharmacies=b.pharmacies.map(x=>({...x,zone:x.zone||x.area||'',importance:x.importance||'B',followDate:x.followDate||'',followNote:x.followNote||'',lat:x.lat||'',lng:x.lng||''}));b.medicines=b.medicines.map(x=>({...x,scientific:x.scientific||x.scientificName||'',selling:x.selling||'',type:x.type||'',image:x.image||'',stockQty:n(x.stockQty),minStock:n(x.minStock)}));b.orders=(b.orders||[]).map(x=>({...x,total:n(x.total)}));b.pharmacyLists=(b.pharmacyLists||[]).map(x=>{let st=x.status||'لم يتم التسليم حتى الآن';if(st==='مطلوب'||st==='مواصلة')st='لم يتم التسليم حتى الآن';if(st==='مكتمل')st='تم التسليم';return {...x,qty:n(x.qty),bonus:n(x.bonus),price:n(x.price),paid:n(x.paid),total:n(x.total),remaining:n(x.remaining),status:st}});b.doctorDeals=(b.doctorDeals||[]).map(x=>{let st=x.status||'مواصلة';if(st==='مكتمل')st='تم التسليم';return {...x,qty:n(x.qty),status:st,kind:x.kind||'deal'}});return b}
+function save(){let data=JSON.stringify(db);try{localStorage.setItem(K,data)}catch(e){}try{if(window.Android&&Android.saveAppData)Android.saveAppData(data)}catch(e){}render();toggleDealerFields();fillDocDealerMeds();if(typeof renderPlanExpensesProgress==='function')renderPlanExpensesProgress();if(typeof renderStockDealer==='function')renderStockDealer();if(typeof renderListsDeals==='function')renderListsDeals();}
 function $(id){return document.getElementById(id)}function v(id){return ($(id)||{}).value?.trim()||''}function set(id,x){if($(id))$(id).value=x??''}function n(x){return +x||0}function fmt(x){return n(x).toLocaleString('en-US')}function today(){return new Date().toISOString().slice(0,10)}function mon(){return today().slice(0,7)}
 
 /* الإصلاح الجذري لحماية النصوص (بدون استخدام رموز تسبب أخطاء) */
@@ -541,13 +604,30 @@ function moreTab(tab){
 }
 
 function clientName(t,id){let a=t=='doctor'?db.doctors:db.pharmacies;return (a.find(x=>x.id==id)||{}).name||'غير محدد'}function med(id){return db.medicines.find(x=>x.id==id)||null}function isSale(o){return o.status=='بيع مؤكد'||o.status=='تم التسليم'}function total(q,p,d){return Math.max(n(q)*n(p)-n(d),0)}function target(){return db.targets.find(x=>x.month==mon())||{month:mon(),target:0,manual:0}}function achieved(){return db.orders.filter(o=>isSale(o)&&String(o.date||'').slice(0,7)==mon()).reduce((a,o)=>a+n(o.total),0)+n(target().manual)}
+function normalizeBusinessType(x){return x==='commercial'?'commercial':'medical'}
+function businessMode(){return normalizeBusinessType((db.profile&&db.profile.businessType)||v('businessType')||'medical')}
+function businessLabel(){return businessMode()==='commercial'?'مندوب تجاري':'مندوب أدوية'}
+function stockTrackingEnabled(){let b=businessMode();return b==='commercial'}
+function stockLabel(){let b=businessMode();return b==='commercial'?'مخزن المنتجات التجارية':'المخزون الخاص'}
+function productStockText(m){let q=n(m&&m.stockQty),min=n(m&&m.minStock);let cls=q<=0?'out':(min&&q<=min?'low':'');return `<span class="stock-badge ${cls}">المتوفر: ${fmt(q)}</span>`}
+function adjustProductStock(medId,delta){let m=med(medId);if(!m)return;let next=n(m.stockQty)+n(delta);m.stockQty=Math.max(next,0)}
+function orderSourceValue(o){return (o&&o.orderSource)||'مباشر'}
+function orderDeliveryValue(o){return (o&&o.deliveryStatus)||((o&&o.status)==='تم التسليم'?'تم التوصيل':'لم يتم التوصيل')}
+function orderStockQty(o){return n(o&&o.qty)+n(o&&o.bonus)}
+function orderAffectsStock(o){return !!(stockTrackingEnabled()&&o&&isSale(o)&&o.medId&&orderSourceValue(o)==='مباشر'&&orderDeliveryValue(o)==='تم التوصيل')}
+function orderPaidValue(o){if(!o||orderSourceValue(o)!=='مباشر')return 0;if(Object.prototype.hasOwnProperty.call(o,'paidAmount'))return Math.min(n(o.paidAmount),n(o.total));return n(o.total)}
+function orderRemainingValue(o){return orderSourceValue(o)==='مباشر'?Math.max(n(o&&o.total)-orderPaidValue(o),0):0}
+function orderSourceChanged(){let s=total(v('orderQty'),v('orderPrice'),v('orderDiscount'));if(v('orderSource')==='من مذخر')set('orderPaid','0');else set('orderPaid',s);calcOrder()}
+function applyOrderStockDiff(oldO,newO){if(oldO&&orderAffectsStock(oldO))adjustProductStock(oldO.medId,orderStockQty(oldO));if(newO&&orderAffectsStock(newO))adjustProductStock(newO.medId,-orderStockQty(newO))}
+function stockWarningForOrder(o){if(!orderAffectsStock(o))return true;let m=med(o.medId);if(!m)return true;let available=n(m.stockQty);let need=orderStockQty(o);if(need>available){return confirm(`الكمية مع البونص (${fmt(need)}) أكبر من المتوفر بالمخزن (${fmt(available)}). هل تريد الحفظ مع تصفير المخزون؟`)}return true}
+function applyBusinessMode(){let b=normalizeBusinessType(v('businessType')||businessMode());if($('businessType')&&$('businessType').value!==b)$('businessType').value=b;let title=b==='commercial'?'مخزن المنتجات التجارية':'المخزون الخاص';if($('stockTitle'))$('stockTitle').textContent=title;if($('productStockLabel'))$('productStockLabel').textContent=b==='medical'?'عدد المنتج المتوفر (اختياري)':'عدد المنتجات المتوفرة بالمخزن';if($('productStockHint'))$('productStockHint').textContent=b==='medical'?'اختياري إذا تريد تتابع رصيد المنتج.':'ينقص العدد تلقائياً عند الطلبية المباشرة التي تم توصيلها، ويشمل الكمية + البونص.';}
 function fillOrderClients(){let t=v('orderClientType'),arr=t=='doctor'?db.doctors:db.pharmacies;$('orderClient').innerHTML='<option value="">اختر العميل</option>'+arr.map(x=>`<option value="${x.id}">${esc(x.name)} - ${esc(x.zone||'')}</option>`).join('')}
 function fillVisitClients(){let t=v('visitType'),arr=t=='doctor'?db.doctors:db.pharmacies;$('visitClient').innerHTML='<option value="">اختر العميل</option>'+arr.map(x=>`<option value="${x.id}">${esc(x.name)} - ${esc(x.zone||'')}</option>`).join('')}
-function medToOrder(){let m=med(v('orderMed'));if(m){set('orderProduct',m.name);set('orderPrice',m.price||'');$('orderMedInfo').innerHTML=`<b>${esc(m.name)}</b><br>العلمي: ${esc(m.scientific||'-')}<br>الشركة: ${esc(m.company||'-')} | الجرعة: ${esc(m.dose||'-')}<br>${esc(m.desc||'')}<br>${m.selling?'نقاط البيع: '+esc(m.selling):''}`}else $('orderMedInfo').textContent='اختر منتج حتى تظهر تفاصيله هنا.';calcOrder();refreshCompanyList();fillDefaultMedCompany()}
-function calcOrder(){let s=total(v('orderQty'),v('orderPrice'),v('orderDiscount'));$('orderCalc').innerHTML=`الصافي: <b class="ok">${fmt(s)} د.ع</b><br>البونص: ${fmt(v('orderBonus'))} | ${isSale({status:v('orderStatus')})?'تنحسب على التاركت':'لا تنحسب على التاركت'}`;return s}
-function saveOrder(){let cid=v('orderClient');if(!cid)return alert('اختر الطبيب أو الصيدلية');let product=v('orderProduct')||(med(v('orderMed'))||{}).name;if(!product)return alert('اختر أو اكتب المنتج');let old=db.orders.find(x=>x.id==edit.order),o={id:edit.order||Date.now(),date:v('orderDate')||today(),clientType:v('orderClientType'),clientId:cid,medId:v('orderMed'),product,qty:n(v('orderQty')),bonus:n(v('orderBonus')),price:n(v('orderPrice')),discount:n(v('orderDiscount')),total:calcOrder(),status:v('orderStatus'),note:v('orderNote')};old?Object.assign(old,o):db.orders.unshift(o);cancelOrder(1);save()}
-function editOrder(id){let o=db.orders.find(x=>x.id==id);if(!o)return;edit.order=id;set('orderDate',o.date);set('orderClientType',o.clientType);fillOrderClients();set('orderClient',o.clientId);set('orderMed',o.medId);medToOrder();set('orderProduct',o.product);set('orderQty',o.qty);set('orderBonus',o.bonus);set('orderPrice',o.price);set('orderDiscount',o.discount);set('orderStatus',o.status);set('orderNote',o.note);$('orderTitle').textContent='تعديل طلبية';$('orderCancel').classList.remove('hide');calcOrder();go('orders')}
-function cancelOrder(no){edit.order=null;['orderProduct','orderQty','orderBonus','orderPrice','orderDiscount','orderNote'].forEach(x=>set(x,''));set('orderDate',today());set('orderClientType','pharmacy');set('orderClient','');set('orderMed','');set('orderStatus','طلبية جديدة');$('orderTitle').textContent='طلبية جديدة';$('orderCancel').classList.add('hide');medToOrder();if(!no)render()}
+function medToOrder(){let m=med(v('orderMed'));if(m){set('orderProduct',m.name);set('orderPrice',m.price||'');$('orderMedInfo').innerHTML=`<b>${esc(m.name)}</b><br>${productStockText(m)}<br>الوصف: ${esc(m.scientific||'-')}<br>الشركة: ${esc(m.company||'-')} | الجرعة/الموديل: ${esc(m.dose||'-')}<br>${esc(m.desc||'')}<br>${m.selling?'نقاط البيع: '+esc(m.selling):''}`}else $('orderMedInfo').textContent='اختر منتج حتى تظهر تفاصيله هنا.';calcOrder();refreshCompanyList();fillDefaultMedCompany()}
+function calcOrder(){let s=total(v('orderQty'),v('orderPrice'),v('orderDiscount')),src=v('orderSource')||'مباشر';if(src==='مباشر'&&$('orderPaid')&&!$('orderPaid').value)set('orderPaid',s);if(src==='من مذخر'&&$('orderPaid'))set('orderPaid','0');let paid=src==='مباشر'?Math.min(n(v('orderPaid')),s):0,rem=src==='مباشر'?Math.max(s-paid,0):0,delivery=v('orderDelivery')||'تم التوصيل';$('orderCalc').innerHTML=`الصافي: <b class="ok">${fmt(s)} د.ع</b><br>المدفوع: <b>${fmt(paid)} د.ع</b> | المتبقي: <b class="${rem?'bad':'ok'}">${fmt(rem)} د.ع</b><br>البونص: ${fmt(v('orderBonus'))} | ${src==='من مذخر'?'طلبية من مذخر: غير محسوبة ذمة عليك':(delivery==='تم التوصيل'?'تم التوصيل':'لم يتم التوصيل')} | ${isSale({status:v('orderStatus')})?'تنحسب على التاركت':'لا تنحسب على التاركت'}`;return s}
+function saveOrder(){let cid=v('orderClient');if(!cid)return alert('اختر الطبيب أو الصيدلية');let product=v('orderProduct')||(med(v('orderMed'))||{}).name;if(!product)return alert('اختر أو اكتب المنتج');let src=v('orderSource')||'مباشر',ttl=calcOrder(),paid=src==='مباشر'?Math.min(n(v('orderPaid')),ttl):0,old=db.orders.find(x=>x.id==edit.order),oldCopy=old?{...old}:null,o={id:edit.order||Date.now(),date:v('orderDate')||today(),clientType:v('orderClientType'),clientId:cid,medId:v('orderMed'),product,qty:n(v('orderQty')),bonus:n(v('orderBonus')),price:n(v('orderPrice')),discount:n(v('orderDiscount')),total:ttl,paidAmount:paid,remainingAmount:src==='مباشر'?Math.max(ttl-paid,0):0,orderSource:src,deliveryStatus:v('orderDelivery')||'تم التوصيل',status:v('orderStatus'),note:v('orderNote')};if(!stockWarningForOrder(o))return;applyOrderStockDiff(oldCopy,o);old?Object.assign(old,o):db.orders.unshift(o);cancelOrder(1);save()}
+function editOrder(id){let o=db.orders.find(x=>x.id==id);if(!o)return;edit.order=id;set('orderDate',o.date);set('orderClientType',o.clientType);fillOrderClients();set('orderClient',o.clientId);set('orderMed',o.medId);medToOrder();set('orderProduct',o.product);set('orderQty',o.qty);set('orderBonus',o.bonus);set('orderPrice',o.price);set('orderDiscount',o.discount);set('orderSource',orderSourceValue(o));set('orderDelivery',orderDeliveryValue(o));set('orderPaid',orderPaidValue(o));set('orderStatus',o.status);set('orderNote',o.note);$('orderTitle').textContent='تعديل طلبية';$('orderCancel').classList.remove('hide');calcOrder();go('orders')}
+function cancelOrder(no){edit.order=null;['orderProduct','orderQty','orderBonus','orderPrice','orderDiscount','orderPaid','orderNote'].forEach(x=>set(x,''));set('orderDate',today());set('orderClientType','pharmacy');set('orderClient','');set('orderMed','');set('orderSource','مباشر');set('orderDelivery','تم التوصيل');set('orderStatus','طلبية جديدة');$('orderTitle').textContent='طلبية جديدة';$('orderCancel').classList.add('hide');medToOrder();if(!no)render()}
 function saveVisit(){let cid=v('visitClient');if(!cid)return alert('اختر العميل');let old=db.visits.find(x=>x.id==edit.visit),vo={id:edit.visit||Date.now(),date:v('visitDate')||today(),type:v('visitType'),clientId:cid,productId:v('visitProduct'),product:(med(v('visitProduct'))||{}).name||'',status:v('visitStatus'),note:v('visitNote')};old?Object.assign(old,vo):db.visits.unshift(vo);cancelVisit(1);save()}
 function editVisit(id){let x=db.visits.find(v=>v.id==id);if(!x)return;edit.visit=id;set('visitDate',x.date);set('visitType',x.type);fillVisitClients();set('visitClient',x.clientId);set('visitProduct',x.productId);set('visitStatus',x.status);set('visitNote',x.note);$('visitTitle').textContent='تعديل زيارة';$('visitCancel').classList.remove('hide');go('visits')}
 function cancelVisit(no){edit.visit=null;['visitNote'].forEach(x=>set(x,''));set('visitDate',today());set('visitType','doctor');fillVisitClients();set('visitClient','');set('visitProduct','');set('visitStatus','تمت');$('visitTitle').textContent='تسجيل زيارة';$('visitCancel').classList.add('hide');if(!no)render()}
@@ -682,6 +762,8 @@ function saveMed(){
         type: typeVal,
         desc: v('medDesc'),
         selling: v('medSelling'),
+        stockQty: n(v('medStockQty')),
+        minStock: 0,
         image: medImageData
     };
     if(edit.med){
@@ -708,6 +790,7 @@ function editMed(id){
     set('medDose', m.dose);
     set('medDesc', m.desc);
     set('medSelling', m.selling);
+    set('medStockQty', m.stockQty||0);
     medImageData=m.image||''; setMedImagePreview(medImageData);
     document.querySelectorAll('input[name="medType"]').forEach(r => r.checked = (r.value === m.type));
     $('medTitle').textContent = 'تعديل منتج';
@@ -717,29 +800,29 @@ function editMed(id){
 function cancelMed(no){
     edit.med = null;
     medImageData=''; setMedImagePreview(''); if($('medImageFile'))$('medImageFile').value='';
-    ['medName','medScientific','medPrice','medDose','medDesc','medSelling'].forEach(x=>set(x,''));
+    ['medName','medScientific','medPrice','medDose','medDesc','medSelling','medStockQty'].forEach(x=>set(x,''));
     document.querySelectorAll('input[name="medType"]').forEach(r => r.checked = false);
     $('medTitle').textContent = 'إضافة منتج';
     if($('medCancel')) $('medCancel').classList.add('hide');
     if(!no) render();
 }
 
-function medPdf(id){let m=med(id);if(!m)return;let w=open('','_blank'),html=`<html dir="rtl"><head><title>${esc(m.name)}</title><style>body{font-family:Tahoma;padding:28px;color:#111}h1{color:#0b5ed7}.box{border:1px solid #ddd;border-radius:14px;padding:14px;margin:10px 0;line-height:1.8}</style></head><body><h1>${esc(m.name)}</h1>${m.image?`<img src="${m.image}" style="width:150px;height:150px;object-fit:cover;border-radius:18px;border:1px solid #ddd">`:''}<div class="box"><b>الاسم العلمي / الوصف:</b> ${esc(m.scientific||'-')}<br><b>الشركة:</b> ${esc(m.company||'-')}<br><b>النوع:</b> ${esc(m.type||'-')}<br><b>السعر:</b> ${fmt(m.price)} د.ع<br><b>الجرعة / الشكل:</b> ${esc(m.dose||'-')}</div><div class="box"><b>شرح المنتج:</b><br>${esc(m.desc||'-')}</div><div class="box"><b>نقاط البيع:</b><br>${esc(m.selling||'-')}</div><scr`+`ipt>print()<\/scr`+`ipt></body></html>`;w.document.write(html);w.document.close()}
-function saveProfile(){db.profile={name:v('repName'),job:v('repJob'),zone:v('repZone'),company:v('repCompany'),phone:v('repPhone'),businessType:v('businessType')||'medical',defaultCompany:v('defaultMedCompany'),reportStyle:v('reportStyle')};save();alert('تم حفظ الإعدادات')}
+function medPdf(id){let m=med(id);if(!m)return;let w=open('','_blank'),html=`<html dir="rtl"><head><title>${esc(m.name)}</title><style>body{font-family:Tahoma;padding:28px;color:#111}h1{color:#0b5ed7}.box{border:1px solid #ddd;border-radius:14px;padding:14px;margin:10px 0;line-height:1.8}</style></head><body><h1>${esc(m.name)}</h1>${m.image?`<img src="${m.image}" style="width:150px;height:150px;object-fit:cover;border-radius:18px;border:1px solid #ddd">`:''}<div class="box"><b>الاسم العلمي / الوصف:</b> ${esc(m.scientific||'-')}<br><b>الشركة:</b> ${esc(m.company||'-')}<br><b>النوع:</b> ${esc(m.type||'-')}<br><b>السعر:</b> ${fmt(m.price)} د.ع<br><b>المتوفر بالمخزن:</b> ${fmt(m.stockQty)}<br><b>الجرعة / الشكل:</b> ${esc(m.dose||'-')}</div><div class="box"><b>شرح المنتج:</b><br>${esc(m.desc||'-')}</div><div class="box"><b>نقاط البيع:</b><br>${esc(m.selling||'-')}</div><scr`+`ipt>print()<\/scr`+`ipt></body></html>`;w.document.write(html);w.document.close()}
+function saveProfile(){db.profile={name:v('repName'),job:v('repJob'),zone:v('repZone'),company:v('repCompany'),phone:v('repPhone'),businessType:normalizeBusinessType(v('businessType')||'medical'),defaultCompany:v('defaultMedCompany'),reportStyle:v('reportStyle')};save();alert('تم حفظ الإعدادات')}
 function saveTarget(){let m=v('targetMonth')||mon(),old=db.targets.find(x=>x.month==m),o={month:m,target:n(v('targetValue')),manual:n(v('manualAchieved'))};old?Object.assign(old,o):db.targets.unshift(o);save();alert('تم حفظ التاركت')}
 
 function orderNumber(o){return 'MRF-'+String(o.id||Date.now()).slice(-8)}
 function orderReceiptHtml(id){
   const o=(db.orders||[]).find(x=>String(x.id)===String(id)); if(!o)return '';
   const p=db.profile||{},m=med(o.medId)||{},client=clientName(o.clientType,o.clientId),type=o.clientType==='doctor'?'طبيب':'صيدلية';
-  const rep=p.name||'MedRep Flow',company=p.company||'moe system',zone=p.zone||'-',receiptNo=orderNumber(o);
+  const rep=p.name||'MedRep Flow',company=p.company||'moe system',zone=p.zone||'-',receiptNo=orderNumber(o),paid=orderPaidValue(o),remaining=orderRemainingValue(o),src=orderSourceValue(o),delivery=orderDeliveryValue(o);
   return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Order Receipt ${receiptNo}</title><style>
   *{box-sizing:border-box}body{margin:0;background:#eef3f8;color:#111827;font-family:Tahoma,Arial,sans-serif;line-height:1.55}.actions{display:flex;gap:8px;width:94%;max-width:760px;margin:12px auto}.actions button{flex:1;border:0;border-radius:12px;padding:12px 10px;background:#155eef;color:#fff;font-weight:900;font-family:inherit}.actions .ghost{background:#e8eef8;color:#155eef}.paper{width:94%;max-width:760px;margin:0 auto 18px;background:#fff;border:1px solid #d7e0eb;border-radius:18px;overflow:hidden;box-shadow:0 14px 34px rgba(15,23,42,.12)}
   .head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:22px 24px;background:linear-gradient(135deg,#f8fbff,#eef5ff);border-bottom:1px solid #d7e0eb}.brand{display:flex;gap:14px;align-items:center}.mark{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#155eef,#12b8b0);color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px;letter-spacing:.5px}.brand h1{margin:0;font-size:25px;color:#0f172a}.brand p{margin:3px 0 0;color:#64748b;font-size:12px}.docbox{text-align:center;border:1px solid #cbd8ea;background:#fff;border-radius:16px;padding:10px 14px;min-width:145px}.docbox b{display:block;color:#155eef;font-size:13px}.docbox span{display:block;margin-top:3px;font-weight:900;color:#0f172a;font-size:15px}.title{padding:18px 24px 4px;text-align:center}.title h2{margin:0;color:#0f172a;font-size:22px}.title p{margin:4px 0 0;color:#64748b;font-size:12px}
   .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 24px}.field{border:1px solid #e2e8f0;border-radius:14px;padding:10px 12px;background:#fbfdff;min-height:62px}.field b{display:block;color:#64748b;font-size:11px;margin-bottom:4px}.field span{display:block;color:#111827;font-size:14px;font-weight:900;word-break:break-word}.section{padding:0 24px 20px}.section h3{margin:10px 0 10px;font-size:15px;color:#0f172a}.items{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #dbe3ef;border-radius:14px;overflow:hidden}.items th{background:#0f46b8;color:#fff;padding:11px 10px;font-size:12px;text-align:right}.items td{padding:12px 10px;border-bottom:1px solid #e5edf6;font-size:13px;font-weight:700}.items tr:last-child td{border-bottom:0}.items td.num{text-align:center;white-space:nowrap}.summary{display:grid;grid-template-columns:1fr 210px;gap:12px;margin-top:14px;align-items:stretch}.note{border:1px dashed #c6d3e3;border-radius:14px;padding:12px;color:#334155;background:#fbfdff;font-size:13px;min-height:70px}.total{background:linear-gradient(135deg,#0f172a,#155eef);color:#fff;border-radius:14px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center}.total small{opacity:.85}.total b{font-size:24px;margin-top:3px}.signs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.sign{height:68px;border:1px solid #e2e8f0;border-radius:14px;padding:10px;color:#64748b;font-size:12px}.foot{border-top:1px solid #e2e8f0;padding:12px 24px;text-align:center;color:#64748b;font-size:11px;background:#fbfdff}.foot a{color:#155eef;text-decoration:none;font-weight:900}
   @media(max-width:620px){.head{grid-template-columns:1fr}.meta{grid-template-columns:1fr 1fr}.summary{grid-template-columns:1fr}.items{font-size:12px}.items th,.items td{padding:9px 6px}.brand h1{font-size:22px}}
   @media print{@page{size:A4;margin:12mm}body{background:#fff}.actions{display:none}.paper{width:100%;max-width:none;margin:0;border-radius:0;box-shadow:none;border:0}.head{background:#f7fbff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.total,.items th{ -webkit-print-color-adjust:exact;print-color-adjust:exact}.foot a{color:#155eef!important}.meta{grid-template-columns:repeat(3,1fr)}}
-  </style></head><body><div class="actions"><button onclick="window.print()">تحميل / طباعة PDF</button><button class="ghost" onclick="history.back()">رجوع</button></div><main class="paper"><header class="head"><div class="brand"><div class="mark">MR</div><div><h1>MedRep Flow</h1><p>${esc(company)}</p></div></div><div class="docbox"><b>Order Receipt</b><span>${receiptNo}</span></div></header><div class="title"><h2>وصل طلبية رسمي</h2><p>هذا الوصل صادر من تطبيق MedRep Flow</p></div><section class="meta"><div class="field"><b>التاريخ</b><span>${esc(o.date||today())}</span></div><div class="field"><b>حالة الطلبية</b><span>${esc(o.status||'-')}</span></div><div class="field"><b>نوع العميل</b><span>${type}</span></div><div class="field"><b>اسم العميل</b><span>${esc(client)}</span></div><div class="field"><b>اسم المندوب</b><span>${esc(rep)}</span></div><div class="field"><b>الزون</b><span>${esc(zone)}</span></div></section><section class="section"><h3>تفاصيل الطلبية</h3><table class="items"><thead><tr><th>المنتج</th><th>الشركة</th><th>الكمية</th><th>البونص</th><th>سعر المفرد</th><th>الخصم</th></tr></thead><tbody><tr><td>${esc(o.product||'-')}</td><td>${esc(m.company||company||'-')}</td><td class="num">${fmt(o.qty)}</td><td class="num">${fmt(o.bonus)}</td><td class="num">${fmt(o.price)} د.ع</td><td class="num">${fmt(o.discount)} د.ع</td></tr></tbody></table><div class="summary"><div class="note"><b>ملاحظات الطلبية</b><br>${o.note?esc(o.note):'لا توجد ملاحظات.'}</div><div class="total"><small>الصافي الكلي</small><b>${fmt(o.total)} د.ع</b></div></div><div class="signs"><div class="sign">توقيع المندوب</div><div class="sign">توقيع / ختم العميل</div></div></section><footer class="foot"><a href="https://Moesystem.online">All rights reserved by moe system</a></footer></main></body></html>`;
+  </style></head><body><div class="actions"><button onclick="window.print()">تحميل / طباعة PDF</button><button class="ghost" onclick="history.back()">رجوع</button></div><main class="paper"><header class="head"><div class="brand"><div class="mark">MR</div><div><h1>MedRep Flow</h1><p>${esc(company)}</p></div></div><div class="docbox"><b>Order Receipt</b><span>${receiptNo}</span></div></header><div class="title"><h2>وصل طلبية رسمي</h2><p>هذا الوصل صادر من تطبيق MedRep Flow</p></div><section class="meta"><div class="field"><b>التاريخ</b><span>${esc(o.date||today())}</span></div><div class="field"><b>حالة الطلبية</b><span>${esc(o.status||'-')}</span></div><div class="field"><b>نوع الطلبية</b><span>${esc(src)}</span></div><div class="field"><b>التوصيل</b><span>${esc(delivery)}</span></div><div class="field"><b>نوع العميل</b><span>${type}</span></div><div class="field"><b>اسم العميل</b><span>${esc(client)}</span></div><div class="field"><b>اسم المندوب</b><span>${esc(rep)}</span></div><div class="field"><b>الزون</b><span>${esc(zone)}</span></div></section><section class="section"><h3>تفاصيل الطلبية</h3><table class="items"><thead><tr><th>المنتج</th><th>الشركة</th><th>الكمية</th><th>البونص</th><th>سعر المفرد</th><th>الخصم</th></tr></thead><tbody><tr><td>${esc(o.product||'-')}</td><td>${esc(m.company||company||'-')}</td><td class="num">${fmt(o.qty)}</td><td class="num">${fmt(o.bonus)}</td><td class="num">${fmt(o.price)} د.ع</td><td class="num">${fmt(o.discount)} د.ع</td></tr></tbody></table><div class="summary"><div class="note"><b>ملاحظات الطلبية</b><br>${o.note?esc(o.note):'لا توجد ملاحظات.'}</div><div class="total"><small>الصافي الكلي</small><b>${fmt(o.total)} د.ع</b><small>المدفوع: ${fmt(paid)} د.ع</small><small>المتبقي: ${fmt(remaining)} د.ع</small></div></div><div class="signs"><div class="sign">توقيع المندوب</div><div class="sign">توقيع / ختم العميل</div></div></section><footer class="foot"><a href="https://Moesystem.online">All rights reserved by moe system</a></footer></main></body></html>`;
 }
 function openOrderReceipt(id){
   const html=orderReceiptHtml(id); if(!html)return alert('لم يتم العثور على الطلبية');
@@ -754,11 +837,34 @@ function downloadOrderReceiptPdf(id){
   openOrderReceipt(id);
 }
 
-function del(arr,id){if(confirm('حذف؟')){db[arr]=db[arr].filter(x=>String(x.id)!=String(id));save()}}
-function dayReport(){let d=v('reportDate')||today(),p=db.profile||{},ords=db.orders.filter(o=>o.date==d),vis=db.visits.filter(x=>x.date==d),sales=ords.filter(isSale),sum=sales.reduce((a,o)=>a+n(o.total),0),style=p.reportStyle||'مختصر';let details=ords.map(o=>`- ${clientName(o.clientType,o.clientId)} | ${o.product} | كمية ${o.qty} | صافي ${fmt(o.total)} | ${o.status}`).join('\n')||'لا توجد طلبيات.';let visits=vis.map(x=>`- ${clientName(x.type,x.clientId)} | ${x.status} | ${x.product||'بدون منتج'}`).join('\n')||'لا توجد زيارات.';let txt=`تقرير يومي ${style} بتاريخ ${d}\n\nالمندوب: ${p.name||'غير محدد'}\nالشركة: ${p.company||'غير محددة'}\nالزون: ${p.zone||'غير محدد'}\n\nالملخص:\nعدد الطلبيات: ${ords.length}\nعدد الزيارات: ${vis.length}\nالبيع المحسوب على التاركت: ${fmt(sum)} د.ع\n\nالطلبيات:\n${details}\n\nالزيارات:\n${visits}\n\nالإجراء القادم:\nمتابعة الطلبيات غير المؤكدة والعملاء المحددين للمتابعة.`;set('reportOutput',txt);go('more');moreTab('reports')}
+function del(arr,id){if(confirm('حذف؟')){let old=(db[arr]||[]).find(x=>String(x.id)===String(id));if(arr==='orders')applyOrderStockDiff(old,null);if(arr==='doctorDeals'&&old&&old.stockDeducted&&old.medId)adjustProductStock(old.medId,n(old.stockDeductQty||old.qty));if(arr==='pharmacyLists'&&old&&old.bonusStockDeducted&&old.medId)adjustProductStock(old.medId,n(old.bonusDeductQty||old.bonus));db[arr]=(db[arr]||[]).filter(x=>String(x.id)!=String(id));save()}}
+function dayReport(){let d=v('reportDate')||today(),p=db.profile||{},ords=db.orders.filter(o=>o.date==d),vis=db.visits.filter(x=>x.date==d),sales=ords.filter(isSale),sum=sales.reduce((a,o)=>a+n(o.total),0),style=p.reportStyle||'مختصر';let details=ords.map(o=>`- ${clientName(o.clientType,o.clientId)} | ${o.product} | كمية ${o.qty} | صافي ${fmt(o.total)} | مدفوع ${fmt(orderPaidValue(o))} | باقي ${fmt(orderRemainingValue(o))} | ${orderSourceValue(o)} | ${orderDeliveryValue(o)} | ${o.status}`).join('\n')||'لا توجد طلبيات.';let visits=vis.map(x=>`- ${clientName(x.type,x.clientId)} | ${x.status} | ${x.product||'بدون منتج'}`).join('\n')||'لا توجد زيارات.';let txt=`تقرير يومي ${style} بتاريخ ${d}\n\nالمندوب: ${p.name||'غير محدد'}\nالشركة: ${p.company||'غير محددة'}\nالزون: ${p.zone||'غير محدد'}\n\nالملخص:\nعدد الطلبيات: ${ords.length}\nعدد الزيارات: ${vis.length}\nالبيع المحسوب على التاركت: ${fmt(sum)} د.ع\n\nالطلبيات:\n${details}\n\nالزيارات:\n${visits}\n\nالإجراء القادم:\nمتابعة الطلبيات غير المؤكدة والعملاء المحددين للمتابعة.`;set('reportOutput',txt);go('more');moreTab('reports')}
 function saveReport(){let text=v('reportOutput');if(!text)return alert('كوّن التقرير أولاً');db.reports.unshift({id:Date.now(),date:v('reportDate')||today(),text});save()}
 function copyText(t){navigator.clipboard?.writeText(t||'');alert('تم النسخ')}
-function csv(rows){return rows.map(r=>r.map(c=>`"${String(c??'').replace(/"/g,'""')}"`).join(',')).join('\n')}function down(nm,c,t='text/csv;charset=utf-8'){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=nm;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),300)}
+function csv(rows){return rows.map(r=>r.map(c=>`"${String(c??'').replace(/"/g,'""')}"`).join(',')).join('\n')}
+function down(nm,c,t='text/csv;charset=utf-8'){
+  try{
+    if(window.Android && typeof Android.saveDownload==='function'){
+      const ok = Android.saveDownload(String(nm||'MedRepFlow-backup.json'), String(c||''), String(t||'application/octet-stream'));
+      if(ok){ alert('تم حفظ النسخة داخل مجلد التنزيلات / MedRepFlow'); return true; }
+    }
+  }catch(e){}
+  try{
+    const blob = new Blob([c],{type:t});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nm;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},700);
+    return true;
+  }catch(e){
+    try{navigator.clipboard&&navigator.clipboard.writeText(String(c||''));alert('تعذر تنزيل الملف، تم نسخ محتوى النسخة الاحتياطية.');}catch(_){}
+    return false;
+  }
+}
 function exportCSV(){down('medical-rep-v10.csv',csv([['section','date','client','product','qty','bonus','price','discount','total','status'],...db.orders.map(o=>['order',o.date,clientName(o.clientType,o.clientId),o.product,o.qty,o.bonus,o.price,o.discount,o.total,o.status]),...db.visits.map(v=>['visit',v.date,clientName(v.type,v.clientId),v.product,'','','','','',v.status]),...db.doctors.map(d=>['doctor','',d.name,d.doctorType,d.spec,'','','','',d.zone]),...db.pharmacies.map(p=>['pharmacy','',p.name,p.owner,'','','','','',p.zone])]))}
 function backup(){const d=new Date().toISOString().slice(0,10);down('MedicalRep-backup-'+d+'.json',JSON.stringify(db,null,2),'application/json')}function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=norm(JSON.parse(r.result));save();alert('تم استرجاع النسخة الاحتياطية بنجاح')}catch(_){alert('ملف غير صالح')}};r.readAsText(f);e.target.value=''}
 
@@ -891,6 +997,183 @@ function renderPlanExpensesProgress(){
   }
 }
 
+
+/* قوائم الصيدليات وديلات الأطباء */
+function statusClass(st){st=st||'';return st==='مطلوب'||st==='مواصلة'||st==='لم يتم التسليم حتى الآن'?'due':(st==='دفعة'||st==='تم التجهيز'?'pay':(st==='ملغي'?'bad':'done'))}
+function normalizeListStatus(st){st=st||'لم يتم التسليم حتى الآن';if(st==='مطلوب'||st==='مواصلة')return 'لم يتم التسليم حتى الآن';if(st==='مكتمل')return 'تم التسليم';return st}
+function listDelivered(st){return normalizeListStatus(st)==='تم التسليم'}
+function productName(id){return (med(id)||{}).name||'بدون منتج'}
+function listProductChanged(){let m=med(v('phListProduct'));if(m&&!v('phListPrice'))set('phListPrice',m.price||'')}
+function fillListDealSelects(){
+  const keep={ph:v('phListPharmacy'),prod:v('phListProduct'),doc:v('docDealDoctor'),dprod:v('docDealProduct')};
+  if($('phListPharmacy'))$('phListPharmacy').innerHTML='<option value="">اختر الصيدلية</option>'+(db.pharmacies||[]).map(p=>`<option value="${p.id}">${esc(p.name)}${p.zone?' - '+esc(p.zone):''}</option>`).join('');
+  if($('docDealDoctor'))$('docDealDoctor').innerHTML='<option value="">اختر الطبيب</option>'+(db.doctors||[]).map(d=>`<option value="${d.id}">${esc(d.name)}${d.zone?' - '+esc(d.zone):''}</option>`).join('');
+  const prodOpts='<option value="">اختر المنتج</option>'+(db.medicines||[]).map(m=>`<option value="${m.id}">${esc(m.name)} - ${fmt(m.price)}</option>`).join('');
+  if($('phListProduct'))$('phListProduct').innerHTML=prodOpts;
+  if($('docDealProduct'))$('docDealProduct').innerHTML=prodOpts;
+  set('phListPharmacy',keep.ph);set('phListProduct',keep.prod);set('docDealDoctor',keep.doc);set('docDealProduct',keep.dprod);
+}
+function savePharmacyList(){
+  const phId=v('phListPharmacy');if(!phId)return alert('اختر الصيدلية');
+  const medId=v('phListProduct'),qty=n(v('phListQty')),bonus=n(v('phListBonus')),price=n(v('phListPrice')),paid=n(v('phListPaid'));
+  const product=(med(medId)||{}).name||'';if(!product)return alert('اختر المنتج');
+  const total=qty*price,remaining=Math.max(total-paid,0);
+  db.pharmacyLists=db.pharmacyLists||[];
+  db.pharmacyLists.unshift({id:Date.now(),date:v('phListDate')||today(),pharmacyId:phId,medId,product,qty,bonus,price,paid,total,remaining,status:normalizeListStatus(v('phListStatus')),note:v('phListNote')});
+  ['phListQty','phListBonus','phListPrice','phListPaid','phListNote'].forEach(x=>set(x,''));set('phListStatus','لم يتم التسليم حتى الآن');save();
+}
+function saveDoctorDeal(){
+  const doctorId=v('docDealDoctor');if(!doctorId)return alert('اختر الطبيب');
+  const medId=v('docDealProduct'),m=med(medId),product=(m||{}).name||'';if(!product)return alert('اختر المنتج');
+  const qty=n(v('docDealQty')),status=v('docDealStatus')||'مواصلة';
+  const row={id:Date.now(),date:v('docDealDate')||today(),doctorId,medId,product,qty:v('docDealQty'),status,note:v('docDealNote')};
+  if(status==='تم التسليم'&&qty>0){adjustProductStock(medId,-qty);row.stockDeducted=true;row.stockDeductQty=qty;}
+  db.doctorDeals=db.doctorDeals||[];db.doctorDeals.unshift(row);
+  ['docDealQty','docDealNote'].forEach(x=>set(x,''));set('docDealStatus','مواصلة');save();
+}
+function pharmacySummaryHtml(id){
+  const rows=(db.pharmacyLists||[]).filter(x=>String(x.pharmacyId)===String(id)).slice(0,4);
+  if(!rows.length)return '';
+  return `<div class="deals-mini"><b>قوائم وبونصات الصيدلية:</b>${rows.map(r=>`<span>${esc(r.product)} | ${fmt(r.qty)} + بونص ${fmt(r.bonus)} | ${esc(r.status)} | المتبقي ${fmt(r.remaining)} د.ع</span>`).join('')}</div>`;
+}
+function doctorDealsHtml(id){
+  const rows=[...(db.doctorDeals||[]).filter(x=>String(x.doctorId)===String(id)),...(db.dealerNeeds||[]).filter(x=>String(x.doctorId)===String(id)).map(x=>({id:x.id,date:x.date,product:productName(x.medId),qty:x.value,status:x.status||'مواصلة',note:x.notes}))].slice(0,5);
+  if(!rows.length)return '';
+  return `<div class="deals-mini"><b>ديلات الطبيب:</b>${rows.map(r=>`<span>${esc(r.product||'ديل')} | ${esc(r.qty||'-')} | ${esc(r.status||'مواصلة')}</span>`).join('')}</div>`;
+}
+
+function productOptionsForFile(selected){
+  return '<option value="">اختر المنتج</option>'+(db.medicines||[]).map(m=>`<option value="${m.id}" ${String(selected||'')===String(m.id)?'selected':''}>${esc(m.name)} - ${fmt(m.price||0)} د.ع</option>`).join('');
+}
+function pharmacyFinancialSummary(phId){
+  const orders=(db.orders||[]).filter(o=>o.clientType==='pharmacy'&&String(o.clientId)===String(phId)&&isSale(o));
+  const directOrders=orders.filter(o=>orderSourceValue(o)==='مباشر');
+  const warehouseOrders=orders.filter(o=>orderSourceValue(o)==='من مذخر');
+  const lists=(db.pharmacyLists||[]).filter(x=>String(x.pharmacyId)===String(phId));
+  const listRows=lists.filter(x=>!x.paymentOnly);
+  const payRows=lists.filter(x=>x.paymentOnly);
+  const ordersTotal=directOrders.reduce((a,o)=>a+n(o.total),0);
+  const warehouseTotal=warehouseOrders.reduce((a,o)=>a+n(o.total),0);
+  const listTotal=listRows.reduce((a,r)=>a+n(r.total),0);
+  const paid=directOrders.reduce((a,o)=>a+orderPaidValue(o),0)+listRows.reduce((a,r)=>a+n(r.paid),0)+payRows.reduce((a,r)=>a+n(r.paid),0);
+  const bonus=listRows.reduce((a,r)=>a+n(r.bonus),0)+orders.reduce((a,o)=>a+n(o.bonus),0);
+  const dueBase=listTotal+ordersTotal;
+  return {ordersTotal,warehouseTotal,listTotal,paid,bonus,remaining:Math.max(dueBase-paid,0),ordersCount:orders.length,lists:listRows,payments:payRows,orders,directOrders,warehouseOrders};
+}
+function pharmacyMaterialsSummary(phId){
+  const mapObj={};
+  function add(product,qty,bonus,total){
+    const k=product||'منتج';
+    mapObj[k]=mapObj[k]||{product:k,qty:0,bonus:0,total:0};
+    mapObj[k].qty+=n(qty); mapObj[k].bonus+=n(bonus); mapObj[k].total+=n(total);
+  }
+  (db.orders||[]).filter(o=>o.clientType==='pharmacy'&&String(o.clientId)===String(phId)).forEach(o=>add(o.product,o.qty,o.bonus,o.total));
+  (db.pharmacyLists||[]).filter(r=>String(r.pharmacyId)===String(phId)&&!r.paymentOnly).forEach(r=>add(r.product,r.qty,r.bonus,r.total));
+  return Object.values(mapObj).sort((a,b)=>b.qty-a.qty);
+}
+function clientFile(show){
+  $('clientFileBg')?.classList.toggle('on',!!show);
+  $('clientFileSheet')?.classList.toggle('on',!!show);
+}
+function openPharmacyFile(id){
+  const ph=(db.pharmacies||[]).find(x=>String(x.id)===String(id)); if(!ph)return;
+  if(edit.phList){const e=(db.pharmacyLists||[]).find(x=>String(x.id)===String(edit.phList)); if(!e||String(e.pharmacyId)!==String(id))edit.phList=null;}
+  const s=pharmacyFinancialSummary(id), materials=pharmacyMaterialsSummary(id);
+  $('clientFileTitle').textContent='ملف الصيدلية - '+(ph.name||'');
+  const listRows=s.lists.slice(0,30).map(r=>`<div class="file-record"><b>${esc(r.product)}</b><small>تاريخ: ${esc(r.date||'')} | كمية: ${fmt(r.qty)} | بونص: ${fmt(r.bonus)} | سعر: ${fmt(r.price)} | مجموع: ${fmt(r.total)} | دفع: ${fmt(r.paid)} | حالة التسليم: ${esc(normalizeListStatus(r.status))}</small>${r.note?`<small>ملاحظة: ${esc(r.note)}</small>`:''}<div class="tools"><button type="button" class="btn-soft smallbtn" onclick="editPharmacyFileList(${r.id},${id})">تعديل الحالة</button><button type="button" class="danger smallbtn" onclick="del('pharmacyLists',${r.id});openPharmacyFile(${id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد قوائم محفوظة لهذه الصيدلية</div>';
+  const orderRows=s.orders.slice(0,20).map(o=>`<div class="file-record"><b>${esc(o.product)}</b><small>${esc(o.date||'')} | ${esc(orderSourceValue(o))} | ${esc(orderDeliveryValue(o))} | كمية ${fmt(o.qty)} | بونص ${fmt(o.bonus)} | الصافي ${fmt(o.total)} د.ع | المدفوع ${fmt(orderPaidValue(o))} | الباقي ${fmt(orderRemainingValue(o))} | ${esc(o.status)}</small></div>`).join('')||'<div class="empty">لا توجد طلبيات مباعة</div>';
+  const payRows=s.payments.slice(0,12).map(r=>`<div class="file-record"><b>دفعة مالية</b><small>${esc(r.date||'')} | مبلغ: ${fmt(r.paid)} د.ع ${r.note?' | '+esc(r.note):''}</small><div class="tools"><button type="button" class="btn-soft smallbtn" onclick="editPharmacyFileList(${r.id},${id})">تعديل</button><button type="button" class="danger smallbtn" onclick="del('pharmacyLists',${r.id});openPharmacyFile(${id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد دفعات منفصلة</div>';
+  const materialRows=materials.length?materials.map(m=>`<div class="product-mini-row"><b>${esc(m.product)}</b><span>كمية ${fmt(m.qty)} | بونص ${fmt(m.bonus)} | ${fmt(m.total)} د.ع</span></div>`).join(''):'<div class="empty">لا توجد مواد مسجلة</div>';
+  $('clientFileBody').innerHTML=`
+    <div class="file-section"><h3>معلومات الصيدلية</h3><p class="muted">المسؤول: ${esc(ph.owner||'-')} | الهاتف: ${esc(ph.phone||'-')} | الزون: ${esc(ph.zone||'-')}</p><p class="muted">${esc(ph.notes||'')}</p></div>
+    <div class="file-stats"><div class="file-stat"><span>البيع المباشر + القوائم</span><b>${fmt(s.listTotal+s.ordersTotal)} د.ع</b></div><div class="file-stat"><span>المدفوع</span><b>${fmt(s.paid)} د.ع</b></div><div class="file-stat"><span>الباقي علينا تحصيله</span><b>${fmt(s.remaining)} د.ع</b></div><div class="file-stat"><span>طلبيات من مذخر</span><b>${fmt(s.warehouseTotal)} د.ع</b></div><div class="file-stat"><span>البونصات</span><b>${fmt(s.bonus)}</b></div></div>
+    <div class="file-section" id="pfFormSection"><h3>${edit.phList?'تعديل قائمة / حالة التسليم':'إدخال قائمة أو دفعة للصيدلية'}</h3><div class="inline-mini-form"><select id="pfType"><option value="list">قائمة مواد</option><option value="payment">دفعة مالية فقط</option></select><input id="pfDate" type="date" value="${today()}"><select id="pfProduct" onchange="fileListProductChanged()">${productOptionsForFile()}</select><div class="row"><input id="pfQty" type="number" placeholder="الكمية"><input id="pfBonus" type="number" placeholder="البونص المطلوب"></div><div class="row"><input id="pfPrice" type="number" placeholder="سعر المفرد" onblur="autoZero(this)"><input id="pfPaid" type="number" placeholder="دفعة / مبلغ مدفوع" onblur="autoZero(this)"></div><label class="small muted">حالة القائمة</label><select id="pfStatus"><option>لم يتم التسليم حتى الآن</option><option>تم التسليم</option><option>ملغي</option></select><textarea id="pfNote" placeholder="ملاحظات"></textarea><div class="tools"><button id="pfSaveBtn" type="button" onclick="savePharmacyFileList(${id})">${edit.phList?'حفظ التعديل':'حفظ داخل ملف الصيدلية'}</button>${edit.phList?`<button type="button" class="ghost" onclick="cancelPharmacyFileListEdit(${id})">إلغاء التعديل</button>`:''}</div></div><p class="muted small">القوائم والبونصات تبقى بحالة لم يتم التسليم حتى الآن، وتكدر ترجع تعدلها إلى تم التسليم لاحقاً.</p></div>
+    <div class="file-section"><h3>شنو عند الصيدلية من موادنا</h3>${materialRows}</div>
+    <div class="file-section"><h3>قوائم وبونصات الصيدلية</h3>${listRows}</div>
+    <div class="file-section"><h3>الدفعات</h3>${payRows}</div>
+    <div class="file-section"><h3>طلبيات الصيدلية من قسم الطلبيات</h3>${orderRows}</div>`;
+  clientFile(1);
+}
+function fileListProductChanged(){let m=med(v('pfProduct'));if(m&&!v('pfPrice'))set('pfPrice',m.price||'')}
+function editPharmacyFileList(rowId,phId){
+  const r=(db.pharmacyLists||[]).find(x=>String(x.id)===String(rowId)); if(!r)return;
+  edit.phList=rowId; openPharmacyFile(phId);
+  setTimeout(()=>{
+    set('pfType',r.paymentOnly?'payment':'list');set('pfDate',r.date||today());set('pfProduct',r.medId||'');set('pfQty',r.qty||'');set('pfBonus',r.bonus||'');set('pfPrice',r.price||'');set('pfPaid',r.paid||'');set('pfStatus',normalizeListStatus(r.status));set('pfNote',r.note||'');
+    $('pfFormSection')?.scrollIntoView({block:'start',behavior:'smooth'});
+  },30);
+}
+function cancelPharmacyFileListEdit(phId){edit.phList=null;openPharmacyFile(phId)}
+function restorePharmacyListStock(row){if(row&&row.bonusStockDeducted&&row.medId)adjustProductStock(row.medId,n(row.bonusDeductQty||row.bonus))}
+function savePharmacyFileList(phId){
+  const mode=v('pfType')||'list', paid=n(v('pfPaid'));
+  db.pharmacyLists=db.pharmacyLists||[];
+  const old=edit.phList?(db.pharmacyLists||[]).find(x=>String(x.id)===String(edit.phList)):null;
+  if(mode==='payment'){
+    if(!paid)return alert('اكتب مبلغ الدفعة');
+    if(old)restorePharmacyListStock(old);
+    const row={id:old?old.id:Date.now(),date:v('pfDate')||today(),pharmacyId:phId,paymentOnly:true,product:'دفعة مالية',qty:0,bonus:0,price:0,total:0,paid,remaining:0,status:'دفعة',note:v('pfNote')};
+    old?Object.assign(old,row):db.pharmacyLists.unshift(row);edit.phList=null;save();openPharmacyFile(phId);return;
+  }
+  const medId=v('pfProduct'),m=med(medId); if(!m)return alert('اختر المنتج');
+  const qty=n(v('pfQty')),bonus=n(v('pfBonus')),price=n(v('pfPrice')),total=qty*price,status=normalizeListStatus(v('pfStatus'));
+  if(old)restorePharmacyListStock(old);
+  const row={id:old?old.id:Date.now(),date:v('pfDate')||today(),pharmacyId:phId,medId,product:m.name,qty,bonus,price,paid,total,remaining:Math.max(total-paid,0),status,note:v('pfNote'),paymentOnly:false};
+  if(listDelivered(status)&&bonus>0){
+    const available=n(m.stockQty);
+    if(available<bonus&&!confirm('البونص أكبر من المتوفر بالمخزن. تريد الحفظ وتصفير المخزون؟')){if(old&&old.bonusStockDeducted)adjustProductStock(old.medId,-n(old.bonusDeductQty||old.bonus));return;}
+    adjustProductStock(medId,-bonus); row.bonusStockDeducted=true; row.bonusDeductQty=bonus;
+  }
+  old?Object.assign(old,row):db.pharmacyLists.unshift(row);edit.phList=null;save();openPharmacyFile(phId);
+}
+function openDoctorFile(id){
+  const d=(db.doctors||[]).find(x=>String(x.id)===String(id)); if(!d)return;
+  if(edit.docDeal){const e=(db.doctorDeals||[]).find(x=>String(x.id)===String(edit.docDeal)); if(!e||String(e.doctorId)!==String(id))edit.docDeal=null;}
+  const linked=pharmacyNames(d.pharmacyIds||[]);
+  const ownDeals=(db.doctorDeals||[]).filter(x=>String(x.doctorId)===String(id));
+  const legacy=(db.dealerNeeds||[]).filter(x=>String(x.doctorId)===String(id)).map(x=>({id:x.id,date:x.date,product:productName(x.medId),qty:x.value,status:x.status||'مواصلة',note:x.notes,type:x.type,legacy:true}));
+  const rows=[...ownDeals,...legacy];
+  const dealsHtml=rows.length?rows.slice(0,30).map(r=>`<div class="file-record"><b>${esc(r.product||'ديل')}</b><small>${esc(r.date||'')} | العدد/القيمة: ${esc(r.qty||'-')} | حالة الديل: ${esc(r.status||'مواصلة')} ${r.kind==='bonus'?' | بونص / فري':''}${r.type?' | '+esc(r.type):''}</small>${r.note?`<small>ملاحظة: ${esc(r.note)}</small>`:''}${!r.legacy?`<div class="tools"><button type="button" class="btn-soft smallbtn" onclick="editDoctorFileDeal(${r.id},${id})">تعديل الحالة</button><button type="button" class="danger smallbtn" onclick="del('doctorDeals',${r.id});openDoctorFile(${id})">حذف</button></div>`:''}</div>`).join(''):'<div class="empty">لا توجد ديلات أو بونصات محفوظة</div>';
+  $('clientFileTitle').textContent='ملف الطبيب - '+(d.name||'');
+  $('clientFileBody').innerHTML=`
+    <div class="file-section"><h3>معلومات الطبيب</h3><p class="muted">النوع: ${esc(d.doctorType||'-')} | الاختصاص: ${esc(d.spec||'-')} | الهاتف: ${esc(d.phone||'-')} | الزون: ${esc(d.zone||'-')}</p><p class="muted">الصيدليات المرتبطة: ${linked.length?linked.map(esc).join('، '):'لا توجد'}</p><p class="muted">${esc(d.notes||'')}</p></div>
+    <div class="file-section" id="dfFormSection"><h3>${edit.docDeal?'تعديل حالة الديل أو البونص':'إضافة ديل أو بونص للطبيب'}</h3><div class="inline-mini-form"><input id="dfDate" type="date" value="${today()}"><select id="dfProduct">${productOptionsForFile()}</select><div class="row"><select id="dfKind"><option value="deal">ديل</option><option value="bonus">بونص / فري</option></select><input id="dfQty" type="number" placeholder="العدد / القيمة"></div><label class="small muted">حالة الديل</label><select id="dfStatus"><option>مواصلة</option><option>تم التجهيز</option><option>تم التسليم</option><option>ملغي</option></select><textarea id="dfNote" placeholder="ملاحظة الديل أو البونص"></textarea><div class="tools"><button id="dfSaveBtn" type="button" onclick="saveDoctorFileDeal(${id})">${edit.docDeal?'حفظ التعديل':'حفظ داخل ملف الطبيب'}</button>${edit.docDeal?`<button type="button" class="ghost" onclick="cancelDoctorFileDealEdit(${id})">إلغاء التعديل</button>`:''}</div></div><p class="muted small">الديل يبقى بحالة مواصلة إلى أن ترجع وتعدله إلى تم التسليم. إذا كان بونص/فري أو تم التسليم، ينقص العدد من المخزن تلقائياً.</p></div>
+    <div class="file-section"><h3>ديلات وبونصات الطبيب</h3>${dealsHtml}</div>`;
+  clientFile(1);
+}
+function editDoctorFileDeal(rowId,doctorId){
+  const r=(db.doctorDeals||[]).find(x=>String(x.id)===String(rowId)); if(!r)return;
+  edit.docDeal=rowId; openDoctorFile(doctorId);
+  setTimeout(()=>{
+    set('dfDate',r.date||today());set('dfProduct',r.medId||'');set('dfKind',r.kind||'deal');set('dfQty',r.qty||'');set('dfStatus',r.status||'مواصلة');set('dfNote',r.note||'');
+    $('dfFormSection')?.scrollIntoView({block:'start',behavior:'smooth'});
+  },30);
+}
+function cancelDoctorFileDealEdit(doctorId){edit.docDeal=null;openDoctorFile(doctorId)}
+function restoreDoctorDealStock(row){if(row&&row.stockDeducted&&row.medId)adjustProductStock(row.medId,n(row.stockDeductQty||row.qty))}
+function saveDoctorFileDeal(doctorId){
+  const medId=v('dfProduct'),m=med(medId); if(!m)return alert('اختر المنتج');
+  const qty=n(v('dfQty')); if(!qty)return alert('اكتب العدد أو القيمة');
+  const kind=v('dfKind')||'deal',status=v('dfStatus')||'مواصلة';
+  db.doctorDeals=db.doctorDeals||[];
+  const old=edit.docDeal?db.doctorDeals.find(x=>String(x.id)===String(edit.docDeal)):null;
+  if(old)restoreDoctorDealStock(old);
+  const row={id:old?old.id:Date.now(),date:v('dfDate')||today(),doctorId,medId,product:m.name,qty,status,note:v('dfNote'),kind};
+  const shouldDeduct=(kind==='bonus'||status==='تم التسليم')&&status!=='ملغي';
+  if(shouldDeduct){
+    const available=n(m.stockQty);
+    if(available<qty&&!confirm('العدد أكبر من المتوفر بالمخزن. تريد الحفظ وتصفير المخزون؟')){if(old&&old.stockDeducted)adjustProductStock(old.medId,-n(old.stockDeductQty||old.qty));return;}
+    adjustProductStock(medId,-qty); row.stockDeducted=true; row.stockDeductQty=qty;
+  }
+  old?Object.assign(old,row):db.doctorDeals.unshift(row);edit.docDeal=null;save();openDoctorFile(doctorId);
+}
+function renderListsDeals(){
+  fillListDealSelects();
+  if(!v('phListDate'))set('phListDate',today());if(!v('docDealDate'))set('docDealDate',today());
+  if($('pharmacyListRecords'))$('pharmacyListRecords').innerHTML=(db.pharmacyLists||[]).slice(0,30).map(r=>`<div class="record-card"><h3>${esc(clientName('pharmacy',r.pharmacyId))}</h3><span class="status-pill ${statusClass(r.status)}">${esc(r.status)}</span><div class="record-row"><span>${esc(r.product)}</span><span>الكمية: ${fmt(r.qty)}</span><span>البونص: ${fmt(r.bonus)}</span><span>السعر: ${fmt(r.price)} د.ع</span><span>المجموع: ${fmt(r.total)} د.ع</span><span>دفعة: ${fmt(r.paid)} د.ع</span><span>المطلوب: ${fmt(r.remaining)} د.ع</span></div><p class="muted">${esc(r.date||'')} ${r.note?' | '+esc(r.note):''}</p><button type="button" class="danger smallbtn" onclick="del('pharmacyLists',${r.id})">حذف</button></div>`).join('')||'<div class="empty">لا توجد قوائم صيدليات محفوظة</div>';
+  if($('doctorDealRecords'))$('doctorDealRecords').innerHTML=(db.doctorDeals||[]).slice(0,30).map(r=>`<div class="record-card"><h3>${esc(clientName('doctor',r.doctorId))}</h3><span class="status-pill ${statusClass(r.status)}">${esc(r.status)}</span><div class="record-row"><span>${esc(r.product)}</span><span>العدد/القيمة: ${esc(r.qty||'-')}</span></div><p class="muted">${esc(r.date||'')} ${r.note?' | '+esc(r.note):''}</p><button type="button" class="danger smallbtn" onclick="del('doctorDeals',${r.id})">حذف</button></div>`).join('')||'<div class="empty">لا توجد ديلات محفوظة</div>';
+}
+
 function toggleDealerFields(){
   const box=$('dealerExtraFields'); if(!box)return;
   const isDealer=(($('docType')&&$('docType').value)||'')==='ديلر';
@@ -908,23 +1191,36 @@ function saveDealerFromDoctor(doctorId){
   const notes=v('docDealerNeedNotes');
   if(!medId && !value && !notes)return;
   db.dealerNeeds=db.dealerNeeds||[];
-  db.dealerNeeds.push({id:Date.now(),doctorId,medId,type:v('docDealerNeedType')||'ديل',value,notes,date:today()});
+  db.dealerNeeds.push({id:Date.now(),doctorId,medId,type:v('docDealerNeedType')||'ديل',value,notes,status:'مواصلة',date:today()});
+  db.doctorDeals=db.doctorDeals||[];
+  db.doctorDeals.unshift({id:Date.now()+1,doctorId,medId,product:productName(medId),qty:value,status:'مواصلة',note:notes,date:today()});
 }
 
 function fillStockDealerSelects(){
-  const medOptions='<option value="">اختر المادة</option>'+(db.medicines||[]).map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join('');
+  const medOptions='<option value="">اختر المنتج</option>'+(db.medicines||[]).map(m=>`<option value="${m.id}">${esc(m.name)} - المتوفر ${fmt(m.stockQty)}</option>`).join('');
   if($('stockMed'))$('stockMed').innerHTML=medOptions;
+}
+function stockMedChanged(){
+  const m=med(v('stockMed'));
+  if(!m)return;
+  set('stockQty',m.stockQty||0);
+  set('stockMinQty',m.minStock||0);
+  const old=(db.stocks||[]).find(x=>String(x.medId)===String(m.id));
+  set('stockCombined',old?old.combined:'');
+  set('stockNotes',old?old.notes:'');
 }
 function saveStock(){
   const medId=v('stockMed');
-  if(!medId)return alert('اختر المادة');
+  if(!medId)return alert('اختر المنتج');
+  const m=med(medId);
+  if(m){m.stockQty=n(v('stockQty'));m.minStock=n(v('stockMinQty'));}
   db.stocks=db.stocks||[];
   const old=db.stocks.find(x=>String(x.medId)===String(medId));
   const combined=v('stockCombined');
   const notes=v('stockNotes');
   const obj={id:old?old.id:Date.now(),medId,combined,notes};
   old?Object.assign(old,obj):db.stocks.push(obj);
-  ['stockCombined','stockNotes'].forEach(id=>{if($(id))$(id).value=''});
+  ['stockCombined','stockNotes','stockQty','stockMinQty'].forEach(id=>{if($(id))$(id).value=''});
   save();
 }
 function medDisplayName(id){
@@ -933,21 +1229,26 @@ function medDisplayName(id){
 }
 function renderStockDealer(){
   fillStockDealerSelects();
+  applyBusinessMode();
   if($('stockList')){
-    const rows=(db.stocks||[]);
-    $('stockList').innerHTML=rows.length?rows.map(s=>`<div class="item"><h3>${medDisplayName(s.medId)}</h3><div class="total"><b>سامبلات / فري:</b><br>${esc(s.combined||'-')}</div>${s.notes?`<p class="small">${esc(s.notes)}</p>`:''}<div class="item-actions"><button type="button" class="btn-danger" onclick="db.stocks=db.stocks.filter(x=>x.id!==${s.id});save()">حذف</button></div></div>`).join(''):'<div class="empty">لا يوجد مخزون محفوظ</div>';
+    const rows=(db.medicines||[]);
+    $('stockList').innerHTML=rows.length?rows.map(m=>{
+      const extra=(db.stocks||[]).find(x=>String(x.medId)===String(m.id));
+      const q=n(m.stockQty),min=n(m.minStock),state=q<=0?'out':(min&&q<=min?'low':'');
+      return `<div class="stock-count-card"><div>${productImageHtml(m)}<b>${esc(m.name)}</b><br><small>${esc(m.company||'')} ${m.type?'| '+esc(m.type):''}</small>${extra&&extra.combined?`<br><small>${esc(extra.combined)}</small>`:''}${extra&&extra.notes?`<br><small>${esc(extra.notes)}</small>`:''}</div><span class="stock-badge ${state}">المتوفر: ${fmt(q)}</span></div>`;
+    }).join(''):'<div class="empty">لا يوجد مخزون محفوظ</div>';
   }
 }
 
-function render(){let p=db.profile||{};['repName','repJob','repZone','repCompany','repPhone','defaultMedCompany'].forEach(id=>set(id,(id==='defaultMedCompany'?p.defaultCompany:p[id.replace('rep','').toLowerCase()])||''));set('reportStyle',p.reportStyle||'مختصر');$('homeName').textContent=p.name||'مندوب علمي';$('homeInfo').textContent=[p.job,p.zone,p.company].filter(Boolean).join(' | ')||'أكمل بياناتك من المزيد';set('businessType',p.businessType||'medical');$('headSub').textContent=p.company?`شركة ${p.company} | زون ${p.zone||'-'}`:'طلبيات، زيارات، عملاء، تاركت';
-if(!v('orderDate'))set('orderDate',today());if(!v('visitDate'))set('visitDate',today());if(!v('reportDate'))set('reportDate',today());if(!v('planDate'))set('planDate',today());if(!v('expenseDate'))set('expenseDate',today());if(!v('targetMonth'))set('targetMonth',mon());refreshDoctorProducts();
+function render(){let p=db.profile||{};if(p.businessType==='cosmetic')p.businessType='commercial';['repName','repJob','repZone','repCompany','repPhone','defaultMedCompany'].forEach(id=>set(id,(id==='defaultMedCompany'?p.defaultCompany:p[id.replace('rep','').toLowerCase()])||''));set('reportStyle',p.reportStyle||'مختصر');set('businessType',normalizeBusinessType(p.businessType||'medical'));applyBusinessMode();let role=businessLabel();$('homeName').textContent=role;$('homeInfo').textContent=[p.name,p.job,p.zone,p.company].filter(Boolean).join(' | ')||'أكمل بياناتك من المزيد';$('headSub').textContent=p.company?`${role} | شركة ${p.company} | زون ${p.zone||'-'}`:`${role} | طلبيات، زيارات، عملاء، تاركت`;
+if(!v('orderDate'))set('orderDate',today());if(!v('visitDate'))set('visitDate',today());if(!v('reportDate'))set('reportDate',today());if(!v('planDate'))set('planDate',today());if(!v('expenseDate'))set('expenseDate',today());if(!v('targetMonth'))set('targetMonth',mon());if(!v('phListDate'))set('phListDate',today());if(!v('docDealDate'))set('docDealDate',today());refreshDoctorProducts();
 let medOpts='<option value="">اختر منتج محفوظ</option>'+db.medicines.map(m=>`<option value="${m.id}">${esc(m.name)} - ${fmt(m.price)}</option>`).join('');$('orderMed').innerHTML=medOpts;$('visitProduct').innerHTML=medOpts;fillOrderClients();fillVisitClients();
 let tg=target(),ach=achieved(),rem=Math.max(n(tg.target)-ach,0),per=tg.target?Math.round(ach/tg.target*100):0;$('hTarget').textContent=fmt(tg.target);$('hAch').textContent=fmt(ach);$('hOrders').textContent=db.orders.filter(o=>o.date==today()).length;let follows=[...db.doctors.map(x=>({...x,type:'طبيب'})),...db.pharmacies.map(x=>({...x,type:'صيدلية'}))].filter(x=>x.followDate==today());$('hFollow').textContent=follows.length;$('targetBar').style.width=Math.min(per,100)+'%';$('targetLine').textContent=`التاركت: ${per}% | المتبقي: ${fmt(rem)} د.ع`;
 $('homeOrders').innerHTML=db.orders.slice(0,4).map(o=>`<div class="item"><b>${esc(clientName(o.clientType,o.clientId))}</b><p class="muted">${esc(o.product)} | ${fmt(o.total)} د.ع | ${esc(o.status)}</p></div>`).join('')||'<div class="empty">لا توجد طلبيات بعد</div>';$('homeFollows').innerHTML=follows.map(x=>`<div class="item"><b>${esc(x.type)}: ${esc(x.name)}</b><p class="muted">${esc(x.followNote||'متابعة')}</p></div>`).join('')||'<div class="empty">لا توجد متابعات اليوم</div>';
-let os=v('orderSearch').toLowerCase(),of=v('orderFilter');$('orderList').innerHTML=db.orders.filter(o=>(clientName(o.clientType,o.clientId)+o.product+o.status).toLowerCase().includes(os)&&(!of||o.status==of)).slice(0,50).map(o=>`<div class="item"><h3>${esc(clientName(o.clientType,o.clientId))}</h3><span class="badge">${esc(o.clientType=='doctor'?'طبيب':'صيدلية')}</span><span class="badge">${esc(o.status)}</span><p>${esc(o.product)} | كمية: ${fmt(o.qty)} | بونص: ${fmt(o.bonus)}</p><p class="muted">خصم: ${fmt(o.discount)} | صافي: <b>${fmt(o.total)}</b> د.ع</p><div class="receipt-actions"><button type="button" class="btn-soft smallbtn" onclick="editOrder(${o.id})">تعديل</button><button type="button" class="btn-soft smallbtn" onclick="downloadOrderReceiptPdf(${o.id})">وصل PDF</button><button type="button" class="btn-danger smallbtn" onclick="del('orders',${o.id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد طلبيات</div>';
+let os=v('orderSearch').toLowerCase(),of=v('orderFilter');$('orderList').innerHTML=db.orders.filter(o=>(clientName(o.clientType,o.clientId)+o.product+o.status+orderSourceValue(o)+orderDeliveryValue(o)).toLowerCase().includes(os)&&(!of||o.status==of)).slice(0,50).map(o=>`<div class="item"><h3>${esc(clientName(o.clientType,o.clientId))}</h3><span class="badge">${esc(o.clientType=='doctor'?'طبيب':'صيدلية')}</span><span class="badge">${esc(o.status)}</span><span class="badge">${esc(orderSourceValue(o))}</span><span class="badge">${esc(orderDeliveryValue(o))}</span><p>${esc(o.product)} | كمية: ${fmt(o.qty)} | بونص: ${fmt(o.bonus)}</p><p class="muted">خصم: ${fmt(o.discount)} | صافي: <b>${fmt(o.total)}</b> د.ع | مدفوع: <b>${fmt(orderPaidValue(o))}</b> | باقي: <b>${fmt(orderRemainingValue(o))}</b> ${o.medId?' | '+productStockText(med(o.medId)):''}</p><div class="receipt-actions"><button type="button" class="btn-soft smallbtn" onclick="editOrder(${o.id})">تعديل</button><button type="button" class="btn-soft smallbtn" onclick="downloadOrderReceiptPdf(${o.id})">وصل PDF</button><button type="button" class="btn-danger smallbtn" onclick="del('orders',${o.id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد طلبيات</div>';
 let vs=v('visitSearch').toLowerCase();$('visitList').innerHTML=db.visits.filter(x=>(clientName(x.type,x.clientId)+x.status+x.product+x.note).toLowerCase().includes(vs)).slice(0,40).map(x=>`<div class="item"><h3>${esc(clientName(x.type,x.clientId))}</h3><span class="badge">${esc(x.type=='doctor'?'طبيب':'صيدلية')}</span><span class="badge">${esc(x.status)}</span><p class="muted">${esc(x.product||'بدون منتج')} | ${esc(x.date)}</p><div class="tools"><button type="button" class="btn-soft smallbtn" onclick="editVisit(${x.id})">تعديل</button><button type="button" class="btn-danger smallbtn" onclick="del('visits',${x.id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد زيارات</div>';
-let cs=v('clientSearch').toLowerCase(),zf=v('zoneFilter').toLowerCase(),arr=clientMode=='doctor'?db.doctors:db.pharmacies;$('clientList').innerHTML=arr.filter(x=>(x.name+(x.spec||'')+(x.owner||'')+x.zone+x.phone+(x.doctorType||'')+pharmacyNames(x.pharmacyIds).join(' ')).toLowerCase().includes(cs)&&(!zf||(x.zone||'').toLowerCase().includes(zf))).slice(0,50).map(x=>{const linked=clientMode=='doctor'?pharmacyNames(x.pharmacyIds):[];return `<div class="item"><h3>${esc(x.name)}</h3>${clientMode=='doctor'?`<span class="badge">${esc(x.doctorType)}</span>`:''}<span class="badge">${esc(x.zone||'بدون زون')}</span><span class="badge">${esc(x.importance||'عادي')}</span><p class="muted">${esc(x.phone||'')} ${x.spec?'| '+esc(x.spec):''}${x.owner?'| '+esc(x.owner):''}</p>${linked.length?`<div class="linked-mini"><b>الصيدليات المرتبطة:</b>${linked.map(n=>`<span>${esc(n)}</span>`).join('')}</div>`:''}<div class="tools"><button type="button" class="btn-soft smallbtn" onclick="go('orders');set('orderClientType','${clientMode}');fillOrderClients();set('orderClient','${x.id}')">طلبية</button><button type="button" class="btn-outline smallbtn" onclick="editClient('${clientMode}',${x.id})">تعديل</button><button type="button" class="btn-outline smallbtn" onclick="map('${esc(x.lat)}','${esc(x.lng)}')">خريطة</button><button type="button" class="btn-danger smallbtn" onclick="del('${clientMode=='doctor'?'doctors':'pharmacies'}',${x.id})">حذف</button></div></div>`}).join('')||'<div class="empty">لا توجد نتائج</div>';
-let ms=v('medSearch').toLowerCase();$('medList').innerHTML=db.medicines.filter(m=>(m.name+m.company+(m.scientific||'')+(m.type||'')).toLowerCase().includes(ms)).slice(0,50).map(m=>`<div class="item">${productImageHtml(m)}<h3>${esc(m.name)}</h3><span class="badge">${esc(m.scientific||'بدون وصف')}</span><span class="badge">${fmt(m.price)} د.ع</span>${m.type?`<span class="badge">${esc(m.type)}</span>`:''}<p class="muted">${esc(m.company||'')} | ${esc(m.dose||'')}</p><div style="clear:both"></div><div class="tools"><button type="button" class="btn-soft smallbtn" onclick="editMed(${m.id})">تعديل</button><button type="button" class="btn-soft smallbtn" onclick="medPdf(${m.id})">PDF</button><button type="button" class="btn-danger smallbtn" onclick="del('medicines',${m.id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد منتجات</div>';
+let cs=v('clientSearch').toLowerCase(),zf=v('zoneFilter').toLowerCase(),arr=clientMode=='doctor'?db.doctors:db.pharmacies;$('clientList').innerHTML=arr.filter(x=>(x.name+(x.spec||'')+(x.owner||'')+x.zone+x.phone+(x.doctorType||'')+pharmacyNames(x.pharmacyIds).join(' ')).toLowerCase().includes(cs)&&(!zf||(x.zone||'').toLowerCase().includes(zf))).slice(0,50).map(x=>{const linked=clientMode=='doctor'?pharmacyNames(x.pharmacyIds):[];return `<div class="item"><h3>${esc(x.name)}</h3>${clientMode=='doctor'?`<span class="badge">${esc(x.doctorType)}</span>`:''}<span class="badge">${esc(x.zone||'بدون زون')}</span><span class="badge">${esc(x.importance||'عادي')}</span><p class="muted">${esc(x.phone||'')} ${x.spec?'| '+esc(x.spec):''}${x.owner?'| '+esc(x.owner):''}</p>${linked.length?`<div class="linked-mini"><b>الصيدليات المرتبطة:</b>${linked.map(n=>`<span>${esc(n)}</span>`).join('')}</div>`:''}${clientMode==='doctor'?doctorDealsHtml(x.id):pharmacySummaryHtml(x.id)}<div class="tools">${clientMode==='doctor'?`<button type="button" class="btn-soft smallbtn" onclick="openDoctorFile(${x.id})">ملف الطبيب</button>`:`<button type="button" class="btn-soft smallbtn" onclick="openPharmacyFile(${x.id})">ملف الصيدلية</button>`}<button type="button" class="btn-soft smallbtn" onclick="go('orders');set('orderClientType','${clientMode}');fillOrderClients();set('orderClient','${x.id}')">طلبية</button><button type="button" class="btn-outline smallbtn" onclick="editClient('${clientMode}',${x.id})">تعديل</button><button type="button" class="btn-outline smallbtn" onclick="map('${esc(x.lat)}','${esc(x.lng)}')">خريطة</button><button type="button" class="btn-danger smallbtn" onclick="del('${clientMode=='doctor'?'doctors':'pharmacies'}',${x.id})">حذف</button></div></div>`}).join('')||'<div class="empty">لا توجد نتائج</div>';
+let ms=v('medSearch').toLowerCase();$('medList').innerHTML=db.medicines.filter(m=>(m.name+m.company+(m.scientific||'')+(m.type||'')).toLowerCase().includes(ms)).slice(0,50).map(m=>`<div class="item">${productImageHtml(m)}<h3>${esc(m.name)}</h3><span class="badge">${esc(m.scientific||'بدون وصف')}</span><span class="badge">${fmt(m.price)} د.ع</span>${productStockText(m)}${m.type?`<span class="badge">${esc(m.type)}</span>`:''}<p class="muted">${esc(m.company||'')} | ${esc(m.dose||'')}</p><div style="clear:both"></div><div class="tools"><button type="button" class="btn-soft smallbtn" onclick="editMed(${m.id})">تعديل</button><button type="button" class="btn-soft smallbtn" onclick="medPdf(${m.id})">PDF</button><button type="button" class="btn-danger smallbtn" onclick="del('medicines',${m.id})">حذف</button></div></div>`).join('')||'<div class="empty">لا توجد منتجات</div>';
 set('targetValue',tg.target||'');set('manualAchieved',tg.manual||'');$('targetSummary').innerHTML=`الشهر: ${esc(tg.month)}<br>المطلوب: <b>${fmt(tg.target)}</b> د.ع<br>المتحقق: <b class="ok">${fmt(ach)}</b> د.ع<br>المتبقي: <b class="bad">${fmt(rem)}</b> د.ع<br>النسبة: ${per}%`;
 let rs=v('reportSearch').toLowerCase();$('reportList').innerHTML=db.reports.filter(r=>(r.text+r.date).toLowerCase().includes(rs)).slice(0,30).map(r=>`<div class="item"><h3>${esc(r.date)}</h3><div class="report">${esc(r.text)}</div><button type="button" class="btn-outline" onclick='copyText(${JSON.stringify(''+(r.text||''))})'>نسخ</button><button type="button" class="btn-danger" onclick="del('reports',${r.id})">حذف</button></div>`).join('')||'<div class="empty">لا توجد تقارير</div>';fillDoctorPharmacies();calcOrder();refreshCompanyList();fillDefaultMedCompany();updateSmartDashboard();}
 
